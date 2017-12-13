@@ -1,9 +1,19 @@
-from settings_secret import *
 
 import os
 
+
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+if "settings_secret.py" in os.listdir(BASE_DIR):
+    from settings_secret import *
+else:
+    # heroku config
+    SECRET_KEY = os.environ['SECRET_KEY']
+    # parse DATABASE_URL config variable
+    import dj_database_url
+    DATABASES['default'].update(dj_database_url.config())
 
 
 # Quick-start development settings - unsuitable for production
@@ -13,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECRET_KEY = '...'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
