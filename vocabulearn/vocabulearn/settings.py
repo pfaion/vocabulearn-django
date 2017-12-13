@@ -12,8 +12,8 @@ else:
     # heroku config
     SECRET_KEY = os.environ['SECRET_KEY']
     # parse DATABASE_URL config variable
-    import dj_database_url
-    DATABASES['default'].update(dj_database_url.config())
+    import dj-database-url
+    DATABASES['default'].update(dj-database-url.config())
 
 
 # Quick-start development settings - unsuitable for production
