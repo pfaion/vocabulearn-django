@@ -1,1 +1,1 @@
-web: python vocabulearn/manage.py runserver -p $PORT
+web: python vocabulearn/manage.py runserver $PORT
