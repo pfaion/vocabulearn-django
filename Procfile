@@ -1,1 +1,1 @@
-web: gunicorn vocabulearn.wsgi:application --log-file -
+web: python vocabulearn/manage.py runserver
