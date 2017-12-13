@@ -1,1 +1,1 @@
-web: python vocabulearn/manage.py runserver $PORT
+web: gunicorn application.wsgi --log-file -
