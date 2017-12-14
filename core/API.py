@@ -15,3 +15,9 @@ def new_card(request):
         card = FlashCard()
         card.save()
         return JsonResponse(card.getDict())
+
+def delete_card(request, card_id):
+    if request.method == 'DELETE':
+        card = FlashCard.objects.get(pk=card_id)
+        card.delete()
+        return HttpResponse('Success')

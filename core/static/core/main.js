@@ -15,7 +15,10 @@ $(document).ready(function() {
 function add_list_click_handlers() {
   $(".list-group-item").each(function() {
     $(this).click(list_click_handler);
+    add_delete_button_handler(this);
+    
   });
+  
 }
 
 function list_click_handler() {
@@ -40,6 +43,33 @@ function show_item_detail(item) {
     var field = $(`#detail-${type}`);
     field.val(content);
   })
+}
+
+function add_delete_button_handler(list_item) {
+  var id = $(list_item).find('span.id').html();
+  $(list_item).find('button.delete-card-button').click(function(event) {
+    event.stopPropagation();
+    delete_card(id);
+    $(list_item).addClass('bg-danger');
+  })
+}
+
+function delete_card(id) {
+  if($(active_item).find('.id').html() == id) {
+    var next = $(active_item).next()
+    if(next.length) {
+      select_list_item(next);
+    } else {
+      var prev = $(active_item).prev()
+      select_list_item(prev);
+    }
+  }
+  $.ajax({
+    method: "DELETE",
+    url: `API/card/delete/${id}/`,
+  }).done(function() {
+    $(`#card-${id}`).remove();
+  });
 }
 
 function add_detail_focusout_save_handlers() {
@@ -149,6 +179,7 @@ function extend_cards() {
     new_list_item.find(".front").html(data.front)
     new_list_item.find(".back").html(data.back)
     new_list_item.click(list_click_handler);
+    add_delete_button_handler(new_list_item);
     new_list_item.insertAfter($(current_active));
     $("#detail-front").focus();
     select_list_item(new_list_item);
