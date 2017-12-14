@@ -1,1 +1,1 @@
-web: gunicorn vocabulearn.wsgi
+web: gunicorn vocabulearn.wsgi --log-file - --access-logfile -
