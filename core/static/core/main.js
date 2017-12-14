@@ -70,6 +70,7 @@ function delete_card(id) {
     url: `API/card/delete/${id}/`,
   }).done(function() {
     $(`#card-${id}`).remove();
+    reload_list_numbering();
   });
 }
 
@@ -184,6 +185,7 @@ function extend_cards() {
     new_list_item.insertAfter($(current_active));
     $("#detail-front").focus();
     select_list_item(new_list_item);
+    reload_list_numbering();
   });
 }
 
