@@ -25,16 +25,10 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-print(os.environ)
 if 'DJANGO_DEBUG' in os.environ:
     DEBUG = os.environ['DJANGO_DEBUG'] in [1, '1']
 else:
     DEBUG = False
-print('===============================')
-print('===============================')
-print(DEBUG)
-print('===============================')
-print('===============================')
 
 # Application definition
 
