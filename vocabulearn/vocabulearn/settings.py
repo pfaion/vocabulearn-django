@@ -78,7 +78,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'vocabulearn.wsgi.application'
+WSGI_APPLICATION = 'vocabulearn.vocabulearn.wsgi.application'
 
 
 # Database
