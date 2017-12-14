@@ -22,11 +22,6 @@ textarea {
   height: 300px;
 }
 
-span:before {
-  content: "\200D";
-  display: inline;
-}
-
 span {
   overflow: hidden;
   white-space: nowrap;
