@@ -20,8 +20,8 @@ class FlashCard(models.Model):
 
     def getDict(self):
         data = model_to_dict(self)
-        data['front_short'] = Truncator(data['front']).chars(self.trunc_length)
-        data['back_short'] = Truncator(data['back']).chars(self.trunc_length)
+        data['front_short'] = self.front
+        data['back_short'] = self.back
         return EasyDict(data)
     
     def update(self, front, back):

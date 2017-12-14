@@ -4,6 +4,7 @@ $(document).ready(function() {
   add_list_click_handlers();
   add_detail_focusout_save_handlers();
   add_tab_navigation();
+  reload_list_numbering();
   
   select_list_item($(".flashcard-list").find(".list-group-item").first());
   $("#detail-front").focus();
@@ -183,6 +184,13 @@ function extend_cards() {
     new_list_item.insertAfter($(current_active));
     $("#detail-front").focus();
     select_list_item(new_list_item);
+  });
+}
+
+function reload_list_numbering() {
+  
+  $(".list-group-item").each(function(index, list_item) {
+    $(list_item).find('.list-number').html(index + 1);
   });
 }
 
