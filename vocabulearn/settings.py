@@ -22,12 +22,22 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = "..."
+
+secrets = {}
+if 'env_secret.py' in os.listdir():
+    import env_secret
+    secrets.update(env_secret.secrets)
+
 if 'SECRET_KEY' in os.environ:
     SECRET_KEY = os.environ['SECRET_KEY']
+elif 'SECRET_KEY' in secrets:
+    SECRET_KEY = secrets['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 if 'DJANGO_DEBUG' in os.environ:
     DEBUG = os.environ['DJANGO_DEBUG'] in [1, '1']
+elif 'DJANGO_DEBUG' in secrets:
+    DEBUG = secrets['DJANGO_DEBUG'] in [1, '1']
 else:
     DEBUG = False
 
@@ -108,9 +118,11 @@ USE_L10N = True
 USE_TZ = True
 
 # Change 'default' database configuration with $DATABASE_URL.
-DATABASES = {
-    'default': dj_database_url.config(conn_max_age=500)
-}
+DATABASES = dict()
+if 'DATABASE_URL' in os.environ:
+    DATABASES['default'] = dj_database_url.parse(os.environ['DATABASE_URL'])
+elif 'DATABASE_URL' in secrets:
+    DATABASES['default'] = dj_database_url.parse(secrets['DATABASE_URL'])
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
