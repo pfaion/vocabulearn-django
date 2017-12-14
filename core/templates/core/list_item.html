@@ -1,7 +1,12 @@
 <li class="list-group-item" id="card-{{f.id}}">
   <div class="row">
-    <span class="front_short col-xl-6">{{f.front_short|default:"&nbsp;"}}</span>
-    <span class="back_short col-xl-6">{{f.back_short|default:"&nbsp;"}}</span>
+    <div class="col-xl-11">
+      <div class="row">
+        <span class="front_short col-xl-6">{{f.front_short}}</span>
+        <span class="back_short col-xl-6">{{f.back_short}}</span>
+      </div>
+    </div>
+    <button type="button" class="col-xl-1 btn btn-small btn-light"><span class="material-icons icon-small">delete_forever</span></button>
   </div>
   <span class="front hidden">{{f.front}}</span>
   <span class="back hidden">{{f.back}}</span>

@@ -26,6 +26,17 @@ button {
   cursor: pointer;
 }
 
+button.btn-small {
+  padding: 0px;
+}
+
+.material-icons {
+  vertical-align: text-top;
+}
+.icon-small {
+  font-size: 18px;
+}
+
 #login-form {
   padding: 20px;
   width: 500px;
