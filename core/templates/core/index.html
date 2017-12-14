@@ -13,7 +13,7 @@
   
   <div class="row">
     <div class="flashcard-list col-xl-5">
-      <h2>Cards (<span id="card-count"></span>)</h2>
+      <h4>Cards (<span id="card-count"></span>)</h4>
       <ul class="list-group">
       {% for f in flash_cards %}
         {% include "core/list_item.html"%}
@@ -23,11 +23,11 @@
     <div id="flashcard-detail" class="col-xl-7">
       <div class="row">
         <div class="col-xl-6">
-          <h2>Front</h2>
+          <h4>Front</h4>
           <textarea class="form-control" id="detail-front"> </textarea>
         </div>
         <div class="col-xl-6">
-          <h2>Back</h2>
+          <h4>Back</h4>
           <textarea class="form-control" id="detail-back"> </textarea>
         </div>
       </div>
