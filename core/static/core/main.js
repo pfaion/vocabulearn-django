@@ -192,6 +192,7 @@ function reload_list_numbering() {
   $(".list-group-item").each(function(index, list_item) {
     $(list_item).find('.list-number').html(index + 1);
   });
+  $("#card-count").html($(".list-group-item").length);
 }
 
 
