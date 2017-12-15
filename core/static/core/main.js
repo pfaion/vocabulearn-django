@@ -6,7 +6,7 @@ $(document).ready(function() {
   add_tab_navigation();
   reload_list_numbering();
   
-  select_list_item($(".flashcard-list").find(".list-group-item").first());
+  select_list_item($("#flashcard-list").find(".list-group-item").first());
   $("#detail-front").focus();
   
 });
@@ -14,7 +14,7 @@ $(document).ready(function() {
 
 
 function add_list_click_handlers() {
-  $(".list-group-item").each(function() {
+  $("#flashcard-list>list-group-item").each(function() {
     $(this).click(list_click_handler);
     add_delete_button_handler(this);
     
