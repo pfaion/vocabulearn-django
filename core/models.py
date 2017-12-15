@@ -8,10 +8,27 @@ from easydict import EasyDict
 
 # Create your models here.
 
+
+
+
+class Folder(models.Model):
+    name = models.CharField(max_length=100)
+    
+    def __str__(self):
+        return self.name
+
+class CardSet(models.Model):
+    name = models.CharField(max_length=100)
+    folder = models.ForeignKey(Folder, on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return self.name
+
 class FlashCard(models.Model):
     front = models.CharField(max_length=2000)
     back = models.CharField(max_length=2000)
     created_date = models.DateTimeField('date created', default=timezone.now)
+    card_set = models.ForeignKey(CardSet, on_delete=models.CASCADE)
     
     trunc_length = 20
     

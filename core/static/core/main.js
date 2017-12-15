@@ -132,8 +132,8 @@ function reload_list_item(id) {
     var list_item = $(`#card-${id}`);
     list_item.find(".front").html(data.front);
     list_item.find(".back").html(data.back);
-    list_item.find(".front_short").html(data.front_short);
-    list_item.find(".back_short").html(data.back_short);
+    list_item.find(".front_short").html(data.front);
+    list_item.find(".back_short").html(data.back);
   });
 }
 
@@ -182,8 +182,8 @@ function extend_cards() {
     var new_list_item = $(current_active).clone();
     new_list_item.prop("id", `card-${data.id}`);
     new_list_item.find(".id").html(data.id)
-    new_list_item.find(".front_short").html(data.front_short)
-    new_list_item.find(".back_short").html(data.back_short)
+    new_list_item.find(".front_short").html(data.front)
+    new_list_item.find(".back_short").html(data.back)
     new_list_item.find(".front").html(data.front)
     new_list_item.find(".back").html(data.back)
     new_list_item.click(list_click_handler);
