@@ -1,3 +1,9 @@
+#menu {
+  top: 10px;
+  position: sticky;
+}
+
+
 .hidden {
   display: none !important;
 }
@@ -11,7 +17,7 @@
 }
 
 .sticky {
-  top: 0;
+  top: 50px;
   position: sticky;
 }
 
