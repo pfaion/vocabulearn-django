@@ -2,11 +2,19 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 
-from .models import FlashCard
+from .models import Folder, CardSet, FlashCard
 
 # Create your views here.
 @login_required
 def index(request):
+    
+    directory = {
+        folder: list(CardSet.objects.filter(folder=folder.id))
+        for folder in Folder.objects.order_by('name')
+    }
+    print(directory)
+    
+    
     flash_cards = [f.getDict() for f in FlashCard.objects.order_by('created_date')]
         
     context = {
