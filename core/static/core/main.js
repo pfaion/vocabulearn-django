@@ -30,6 +30,12 @@ function list_click_handler() {
 function select_list_item(item) {
   set_item_active(item);
   show_item_detail(item);
+  if($(active_item).prevAll().length < 4) {
+    $(document).scrollTop(0);
+  } else {
+    $(active_item).prevAll()[3].scrollIntoView();
+  }
+  // $(document).scrollTop($(document).scrollTop() - 200);
 }
 
 function set_item_active(item) {

@@ -12,6 +12,18 @@
   </div>
   
   <div class="row">
+    <div class="col-xl-3">
+      <div class="sticky">
+        <h4>Sets</h4>
+        <ul id="set-list" class="list-group small">
+          <li class="list-group-item border-0"><span class="material-icons icon-small">expand_more</span>Lecture 1</li>
+          <li class="list-group-item border-0"><span class="set-list-indent"></span>Verbs</li>
+          <li class="list-group-item border-0"><span class="set-list-indent"></span>Adjectives</li>
+          <li class="list-group-item border-0"><span class="material-icons icon-small">chevron_right</span>Lecture 2</li><li class="list-group-item border-0"><span class="material-icons icon-small">chevron_right</span>Test how long this can get until the internet explodes</li>
+        </ul>
+      </div>
+      
+    </div>
     <div class="flashcard-list col-xl-5">
       <h4>Cards (<span id="card-count"></span>)</h4>
       <ul class="list-group">
@@ -20,18 +32,11 @@
       {% endfor %}
       </ul>
     </div>
-    <div id="flashcard-detail" class="col-xl-7">
+    <div id="flashcard-detail" class="col-xl-4">
       <div class="sticky">
-        <div class="row">
-          <div class="col-xl-6">
-            <h4>Front</h4>
-            <textarea class="form-control" id="detail-front"> </textarea>
-          </div>
-          <div class="col-xl-6">
-            <h4>Back</h4>
-            <textarea class="form-control" id="detail-back"> </textarea>
-          </div>
-        </div>
+        <h4>Front / Back</h4>
+        <textarea class="form-control" id="detail-front"> </textarea>
+        <textarea class="form-control" id="detail-back"> </textarea>
       </div>
       
     </div>
