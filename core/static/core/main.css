@@ -7,11 +7,23 @@
 }
 
 #set-list > li {
-  padding: 5px 0px;
+  padding: 3px 0px;
 }
 
-.set-list-indent {
-  margin-left: 36px;
+.folder div {
+  padding: 0px;
+}
+.card-set .icon {
+  padding: 0px;
+}
+
+.card-set .label {
+  padding: 0 0 0 20px;
+}
+
+span.empty::before {
+  display: inline-block;
+  content: "\200b";
 }
 
 
@@ -19,7 +31,7 @@
   display: none !important;
 }
 
-.list-group-item{
+#flashcard-list .list-group-item{
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
