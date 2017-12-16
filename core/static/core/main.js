@@ -1,14 +1,19 @@
 var active_item = null;
 
 $(document).ready(function() {
-  add_list_click_handlers();
-  add_detail_focusout_save_handlers();
+  // add_list_click_handlers();
+  // add_detail_focusout_save_handlers();
   add_tab_navigation();
   reload_list_numbering();
   
   select_list_item($("#flashcard-list").find(".list-group-item").first());
   $("#detail-front").focus();
   
+  
+  $(".delete-card-button").hover(function(){
+    $(this).toggleClass("bg-danger");
+    $(this).toggleClass("text-white");
+  })
 });
 
 
@@ -196,11 +201,10 @@ function extend_cards() {
 }
 
 function reload_list_numbering() {
-  
-  $('#flashcard-list').find(".list-group-item").each(function(index, list_item) {
+  $('#flashcard-list').find(".row").each(function(index, list_item) {
     $(list_item).find('.list-number').html(index + 1);
   });
-  $("#card-count").html($('#flashcard-list').find(".list-group-item").length);
+  $("#card-count").html($('#flashcard-list').find(".row").length);
 }
 
 

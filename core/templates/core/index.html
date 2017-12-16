@@ -66,15 +66,29 @@
       </div>
       
     </div>
-    <div id="flashcard-list" class="col-xl-5">
+    <div class="col-xl-4">
       <h4>Cards (<span id="card-count"></span>)</h4>
-      <ul class="list-group">
+      <div id="flashcard-list" class="small">
+        {% for f in flash_cards %}
+          {% if forloop.first %}
+              {% include "core/list_item.html" with rounded="rounded-top"%}                       
+          {% else %}
+            {% if forloop.last %}
+              {% include "core/list_item.html" with rounded="rounded-bottom"%}       
+            {% else %}
+              {% include "core/list_item.html"%}
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+      </div>
+      
+      <!-- <ul class="list-group small">
       {% for f in flash_cards %}
         {% include "core/list_item.html"%}
       {% endfor %}
-      </ul>
+      </ul> -->
     </div>
-    <div id="flashcard-detail" class="col-xl-4">
+    <div id="flashcard-detail" class="col-xl-5">
       <div class="sticky">
         <h4>Front / Back</h4>
         <textarea class="form-control" id="detail-front"> </textarea>
