@@ -9,16 +9,19 @@ from .models import Folder, CardSet, FlashCard
 def index(request):
     
     directory = {
-        folder: list(CardSet.objects.filter(folder=folder.id))
+        folder: list(CardSet.objects.order_by('name').filter(folder=folder.id))
         for folder in Folder.objects.order_by('name')
     }
     print(directory)
+    
+    
     
     
     flash_cards = [f.getDict() for f in FlashCard.objects.order_by('created_date')]
         
     context = {
         'flash_cards': flash_cards,
+        'directory': directory
     }
     return render(request, 'core/index.html', context)
 

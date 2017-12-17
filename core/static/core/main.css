@@ -10,15 +10,49 @@
   padding: 3px 0px;
 }
 
-.folder div {
-  padding: 0px;
-}
-.card-set .icon {
-  padding: 0px;
+#set-list .row {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  min-height: 22px;
 }
 
-.card-set .label {
-  padding: 0 0 0 20px;
+.folder .row,
+.folder-add .row {
+  margin: 0 0 -1px 0;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+#set-list .icon {
+  flex-basis: 10%;
+}
+
+#set-list .label {
+  flex-basis: 90%;
+}
+
+.card-set-add .row,
+.folder-add .row {
+  cursor: pointer;
+}
+
+.card-set-add .row:hover,
+.folder-add .row:hover {
+  background-color: #28a745;
+  color: white;
+}
+
+
+/* .folder div {
+  padding-left: 0px;
+  padding-right: 0px;
+} */
+
+.card-set .row,
+.card-set-add .row {
+  margin: 0 0 -1px 30px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 span.empty::before {
@@ -50,17 +84,25 @@ span.empty::before {
 }
 
 .list-number {
+  flex-basis: 12%;
   padding-left: 10px;
-  padding-right: 0px;
-}
-
-#flashcard-list .col-xl-5 {
-  padding-left: 20px;
   padding-right: 5px;
 }
 
+.front_short,
+.back_short {
+  flex-basis: 38%;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 .delete-card-button {
+  flex-basis: 12%;
   cursor: pointer;
+  text-align: center;
   padding-left: 5px;
   padding-right: 5px;
 }
@@ -78,12 +120,6 @@ textarea {
   margin-bottom: 10px;
 }
 
-.front_short, .back_short {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
 button {
   cursor: pointer;
 }
@@ -98,7 +134,9 @@ button.btn-small {
 .icon-small {
   font-size: 18px;
 }
-
+.icon-smaller {
+  font-size: 15px;
+}
 #login-form {
   padding: 20px;
   width: 500px;

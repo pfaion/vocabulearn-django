@@ -16,53 +16,66 @@
       <div class="sticky">
         <h4>Sets</h4>
         <ul id="set-list" class="list-group small">
+          {% for folder, sets in directory.items %}
+            {% include "core/card-set-item-folder.html"%}
+            {% for set in sets %}
+              {% include "core/card-set-item-set.html"%}
+            {% endfor %}
+              {% include "core/card-set-item-add-set.html"%}
+          {% endfor %}
+          {% include "core/card-set-item-add-folder.html"%}
+        </ul>
+        
+        
+        <!-- 
+        <ul id="set-list" class="list-group small">
           <li class="list-group-item border-0 folder">
             <div class="row">
-              <div class="col-xl-1 icon">
+              <div class="icon">
                 <span class="material-icons icon-small">expand_more</span>
               </div>
-              <div class="col-xl-11 label">Lecture 1</div>
+              <div class="label">Lecture 1</div>
             </div>
           </li>
           <li class="list-group-item border-0 card-set">
             <div class="row">
-              <div class="col-xl-1 icon"><span class="empty"></span></div>
-              <div class="col-xl-11 label">Verbs</div>
+              <div class="icon"><span class="empty"></span></div>
+              <div class="label">Verbs</div>
             </div>
           </li>
           <li class="list-group-item border-0 card-set">
             <div class="row">
-              <div class="col-xl-1 icon"><span class="empty"></span></div>
-              <div class="col-xl-11 label">Adjectives</div>
+              <div class="icon"><span class="empty"></span></div>
+              <div class="label">Adjectives or some longer string for testing wraps</div>
             </div>
           </li>
           <li class="list-group-item border-0 card-set">
             <div class="row">
-              <div class="col-xl-1 icon"><span class="empty"></span></div>
-              <div class="col-xl-11 label"><span class="material-icons icon-small border rounded text-success">add</span></div>
+              <div class="icon"><span class="empty"></span></div>
+              <div class="label add-button"><span class="material-icons icon-small">add</span></div>
             </div>
           </li>
           <li class="list-group-item border-0 folder">
             <div class="row">
-              <div class="col-xl-1 icon">
+              <div class="icon">
                 <span class="material-icons icon-small">chevron_right</span>
               </div>
-              <div class="col-xl-11 label">Lecture 2</div>
+              <div class="label">Lecture 2</div>
             </div>
           </li>
           <li class="list-group-item border-0 folder">
             <div class="row">
-              <div class="col-xl-1 icon">
+              <div class="icon">
                 <span class="material-icons icon-small">chevron_right</span>
               </div>
-              <div class="col-xl-11 label">Test how long this can get until the internet explodes</div>
+              <div class="label">Test how long this can get until the internet explodes</div>
             </div>
           </li>
           <li class="list-group-item border-0 folder">
-            <div class="row"><span class="material-icons icon-small border rounded text-success">add</span></div>
+            <div class="row add-button"><span class="material-icons icon-small">add</span></div>
           </li>
           
-        </ul>
+        </ul> -->
       </div>
       
     </div>
@@ -71,22 +84,16 @@
       <div id="flashcard-list" class="small">
         {% for f in flash_cards %}
           {% if forloop.first %}
-              {% include "core/list_item.html" with rounded="rounded-top"%}                       
+              {% include "core/card_list_item.html" with rounded="rounded-top"%}                       
           {% else %}
             {% if forloop.last %}
-              {% include "core/list_item.html" with rounded="rounded-bottom"%}       
+              {% include "core/card_list_item.html" with rounded="rounded-bottom"%}       
             {% else %}
-              {% include "core/list_item.html"%}
+              {% include "core/card_list_item.html"%}
             {% endif %}
           {% endif %}
         {% endfor %}
       </div>
-      
-      <!-- <ul class="list-group small">
-      {% for f in flash_cards %}
-        {% include "core/list_item.html"%}
-      {% endfor %}
-      </ul> -->
     </div>
     <div id="flashcard-detail" class="col-xl-5">
       <div class="sticky">
