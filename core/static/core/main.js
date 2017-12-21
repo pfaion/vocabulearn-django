@@ -1,12 +1,12 @@
 var active_item = null;
 
 $(document).ready(function() {
-  // add_list_click_handlers();
-  // add_detail_focusout_save_handlers();
+  add_list_click_handlers();
+  add_detail_focusout_save_handlers();
   add_tab_navigation();
   reload_list_numbering();
   
-  select_list_item($("#flashcard-list").find(".list-group-item").first());
+  select_list_item($("#flashcard-list").find(".row").first());
   $("#detail-front").focus();
   
   
@@ -19,7 +19,7 @@ $(document).ready(function() {
 
 
 function add_list_click_handlers() {
-  $("#flashcard-list").find(".list-group-item").each(function() {
+  $("#flashcard-list").find(".row").each(function() {
     $(this).click(list_click_handler);
     add_delete_button_handler(this);
     
@@ -59,7 +59,7 @@ function show_item_detail(item) {
 
 function add_delete_button_handler(list_item) {
   var id = $(list_item).find('span.id').html();
-  $(list_item).find('button.delete-card-button').click(function(event) {
+  $(list_item).find('.delete-card-button').click(function(event) {
     event.stopPropagation();
     delete_card(id);
     $(list_item).addClass('bg-danger');
