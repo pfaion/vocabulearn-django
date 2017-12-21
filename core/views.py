@@ -6,7 +6,7 @@ from .models import Folder, CardSet, FlashCard
 
 # Create your views here.
 @login_required
-def index(request):
+def index(request, set_id=None):
     
     directory = {
         folder: list(CardSet.objects.order_by('name').filter(folder=folder.id))

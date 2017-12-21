@@ -6,6 +6,7 @@ from . import API
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('set/<int:set_id>/', views.index, name='index'),
     path('login/', auth_views.login, {'template_name': 'core/login.html'}, name='login'),
     path('logout/', auth_views.logout, {'next_page': '/'}, name='logout'),
     path('API/card/<int:card_id>/', API.card, name='card'),

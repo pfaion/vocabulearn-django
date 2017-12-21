@@ -33,6 +33,11 @@
   flex-basis: 90%;
 }
 
+#set-list a {
+  text-decoration: inherit;
+  color: inherit;
+}
+
 .card-set-add .row,
 .folder-add .row {
   cursor: pointer;

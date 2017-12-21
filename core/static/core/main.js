@@ -16,8 +16,7 @@ $(document).ready(function() {
   });
   
   $("#set-list").find(".folder-add .row, .card-set-add .row").hover(function(){
-    $(this).toggleClass("bg-success");
-    $(this).toggleClass("text-white");
+    $(this).toggleClass("alert-success");
     $(this).toggleClass("text-secondary");
   });
   
@@ -32,6 +31,14 @@ $(document).ready(function() {
         $(this).toggleClass("hidden");
       }
     });
+  });
+  
+  $("#set-list").find(".card-set .row").hover(function() {
+    $(this).toggleClass("alert-primary");
+  });
+  
+  $("#set-list").find(".folder .row").hover(function() {
+    // $(this).toggleClass("alert-warning");
   });
   
 });
