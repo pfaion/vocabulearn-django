@@ -14,6 +14,8 @@
   padding-top: 3px;
   padding-bottom: 3px;
   min-height: 22px;
+  cursor: pointer;
+  user-select: none;
 }
 
 .folder .row,
@@ -34,12 +36,6 @@
 .card-set-add .row,
 .folder-add .row {
   cursor: pointer;
-}
-
-.card-set-add .row:hover,
-.folder-add .row:hover {
-  background-color: #28a745;
-  color: white;
 }
 
 

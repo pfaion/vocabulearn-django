@@ -13,7 +13,27 @@ $(document).ready(function() {
   $(".delete-card-button").hover(function(){
     $(this).toggleClass("bg-danger");
     $(this).toggleClass("text-white");
-  })
+  });
+  
+  $("#set-list").find(".folder-add .row, .card-set-add .row").hover(function(){
+    $(this).toggleClass("bg-success");
+    $(this).toggleClass("text-white");
+    $(this).toggleClass("text-secondary");
+  });
+  
+  $("#set-list").find(".folder").click(function(){
+    $(this).find(".icon span").each(function() {
+      $(this).toggleClass("hidden");
+    });
+    $(this).nextAll().each(function() {
+      if($(this).hasClass("folder") || $(this).hasClass("folder-add")) {
+        return false;
+      } else {
+        $(this).toggleClass("hidden");
+      }
+    });
+  });
+  
 });
 
 
