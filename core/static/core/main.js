@@ -6,15 +6,40 @@ $(document).ready(function() {
   add_tab_navigation();
   reload_list_numbering();
   
-  select_list_item($("#flashcard-list").find(".list-group-item").first());
+  select_list_item($("#flashcard-list").find(".row").first());
   $("#detail-front").focus();
+  
+  
+  $(".delete-card-button").hover(function(){
+    $(this).toggleClass("bg-danger");
+    $(this).toggleClass("text-white");
+  });
+  
+  $("#set-list").find(".folder-add .row, .card-set-add .row").hover(function(){
+    $(this).toggleClass("bg-success");
+    $(this).toggleClass("text-white");
+    $(this).toggleClass("text-secondary");
+  });
+  
+  $("#set-list").find(".folder").click(function(){
+    $(this).find(".icon span").each(function() {
+      $(this).toggleClass("hidden");
+    });
+    $(this).nextAll().each(function() {
+      if($(this).hasClass("folder") || $(this).hasClass("folder-add")) {
+        return false;
+      } else {
+        $(this).toggleClass("hidden");
+      }
+    });
+  });
   
 });
 
 
 
 function add_list_click_handlers() {
-  $("#flashcard-list").find(".list-group-item").each(function() {
+  $("#flashcard-list").find(".row").each(function() {
     $(this).click(list_click_handler);
     add_delete_button_handler(this);
     
@@ -54,7 +79,7 @@ function show_item_detail(item) {
 
 function add_delete_button_handler(list_item) {
   var id = $(list_item).find('span.id').html();
-  $(list_item).find('button.delete-card-button').click(function(event) {
+  $(list_item).find('.delete-card-button').click(function(event) {
     event.stopPropagation();
     delete_card(id);
     $(list_item).addClass('bg-danger');
@@ -196,11 +221,10 @@ function extend_cards() {
 }
 
 function reload_list_numbering() {
-  
-  $('#flashcard-list').find(".list-group-item").each(function(index, list_item) {
+  $('#flashcard-list').find(".row").each(function(index, list_item) {
     $(list_item).find('.list-number').html(index + 1);
   });
-  $("#card-count").html($('#flashcard-list').find(".list-group-item").length);
+  $("#card-count").html($('#flashcard-list').find(".row").length);
 }
 
 
