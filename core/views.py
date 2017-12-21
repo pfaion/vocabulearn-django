@@ -8,6 +8,11 @@ from .models import Folder, CardSet, FlashCard
 @login_required
 def index(request, set_id=None):
     
+    if set_id is None:
+        first_card_id = CardSet.objects.order_by('name').first().id
+        set_id = first_card_id
+    
+    
     directory = {
         folder: list(CardSet.objects.order_by('name').filter(folder=folder.id))
         for folder in Folder.objects.order_by('name')
@@ -21,7 +26,8 @@ def index(request, set_id=None):
         
     context = {
         'flash_cards': flash_cards,
-        'directory': directory
+        'directory': directory,
+        'set_id': set_id,
     }
     return render(request, 'core/index.html', context)
 

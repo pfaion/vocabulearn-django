@@ -1,6 +1,6 @@
 from django.http import HttpResponse, JsonResponse
 
-from .models import FlashCard
+from .models import FlashCard, CardSet
 
 def card(request, card_id):
     card = FlashCard.objects.get(pk=card_id)
@@ -10,9 +10,10 @@ def card(request, card_id):
     elif request.method == 'GET':
         return JsonResponse(card.getDict())
 
-def new_card(request):
+def new_card(request, set_id):
     if request.method == 'PUT':
         card = FlashCard()
+        card.card_set = CardSet.objects.get(pk=set_id)
         card.save()
         return JsonResponse(card.getDict())
 

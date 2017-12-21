@@ -1,4 +1,5 @@
 var active_item = null;
+var set_id = null;
 
 $(document).ready(function() {
   add_list_click_handlers();
@@ -37,9 +38,7 @@ $(document).ready(function() {
     $(this).toggleClass("alert-primary");
   });
   
-  $("#set-list").find(".folder .row").hover(function() {
-    // $(this).toggleClass("alert-warning");
-  });
+  set_id = $("#set-id").html()
   
 });
 
@@ -105,7 +104,7 @@ function delete_card(id) {
   }
   $.ajax({
     method: "DELETE",
-    url: `API/card/delete/${id}/`,
+    url: `/API/card/delete/${id}/`,
   }).done(function() {
     $(`#card-${id}`).remove();
     reload_list_numbering();
@@ -139,7 +138,7 @@ function save_flashcard(card) {
   var item = $(active_item);
   $.ajax({
     method: "POST",
-    url: `API/card/${card.id}/`,
+    url: `/API/card/${card.id}/`,
     data: {
       front: card.front,
       back: card.back,
@@ -159,7 +158,7 @@ function save_flashcard(card) {
 function reload_list_item(id) {
   return $.ajax({
     method: "GET",
-    url: `API/card/${id}/`
+    url: `/API/card/${id}/`
   }).done(function(data) {
     var list_item = $(`#card-${id}`);
     list_item.find(".front").html(data.front);
@@ -206,10 +205,11 @@ function add_tab_navigation() {
 }
 
 function extend_cards() {
+  console.log("extend");
   var current_active = active_item;
   $.ajax({
     method: "PUT",
-    url: `API/card/new/`,
+    url: `/API/card/new/${set_id}/`,
   }).done(function(data) {
     var new_list_item = $(current_active).clone();
     new_list_item.prop("id", `card-${data.id}`);
