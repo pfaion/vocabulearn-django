@@ -18,7 +18,14 @@ def index(request, set_id=None):
         for folder in Folder.objects.order_by('name')
     }
     
-    flash_cards = [f.getDict() for f in FlashCard.objects.order_by('created_date')]
+    current_set = CardSet.objects.get(pk=set_id)
+    flash_cards = FlashCard.objects.filter(card_set=current_set).order_by('created_date')
+    if len(flash_cards) == 0:
+        card = FlashCard()
+        card.card_set = current_set
+        card.save()
+    flash_cards = FlashCard.objects.filter(card_set=current_set).order_by('created_date')
+    flash_cards = [f.getDict() for f in flash_cards]
         
     context = {
         'flash_cards': flash_cards,
