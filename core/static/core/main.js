@@ -38,6 +38,35 @@ $(document).ready(function() {
     $(this).toggleClass("alert-secondary");
   });
   
+  $("#set-list").find(".folder-add .row").click(function() {
+    $("#modal-add-folder").modal("show");
+  });
+  $("#modal-add-folder").find("#submit-button").click(function() {
+    console.log("clicked");
+    $.ajax({
+      method: "PUT",
+      url: `/API/folder/new/`,
+    }).done(function(data) {
+      console.log("created done");
+      var id = data.id;
+      var name = $("#modal-add-folder").find("#field").val();
+      $.ajax({
+        method: "POST",
+        url: `/API/folder/${id}/`,
+        data: {
+          name: name
+        }
+      }).done(function() {
+        console.log("updated done");
+        location.reload();
+      });
+    });
+  })
+  
+  $("#set-list").find(".card-set-add .row").click(function() {
+    $("#modal-add-set").modal("show");
+  });
+  
   set_id = $("#set-id").html()
   
 });

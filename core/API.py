@@ -1,6 +1,6 @@
 from django.http import HttpResponse, JsonResponse
 
-from .models import FlashCard, CardSet
+from .models import FlashCard, CardSet, Folder
 
 def card(request, card_id):
     card = FlashCard.objects.get(pk=card_id)
@@ -22,3 +22,17 @@ def delete_card(request, card_id):
         card = FlashCard.objects.get(pk=card_id)
         card.delete()
         return HttpResponse('Success')
+        
+def folder(request, folder_id):
+    folder = Folder.objects.get(pk=folder_id)
+    if request.method == 'POST':
+        print("got update request, name = {}".format(request.POST['name']))
+        folder.update(request.POST['name'])
+        return HttpResponse('Saved.')
+        
+
+def new_folder(request):
+    if request.method == 'PUT':
+        folder = Folder()
+        folder.save()
+        return JsonResponse({'id': folder.id})

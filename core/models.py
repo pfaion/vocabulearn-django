@@ -16,6 +16,11 @@ class Folder(models.Model):
     
     def __str__(self):
         return self.name
+        
+    def update(self, name):
+        self.name = name
+        self.save()
+        
 
 class CardSet(models.Model):
     name = models.CharField(max_length=100)
@@ -23,6 +28,7 @@ class CardSet(models.Model):
     
     def __str__(self):
         return self.name
+        
 
 class FlashCard(models.Model):
     front = models.CharField(max_length=2000)
