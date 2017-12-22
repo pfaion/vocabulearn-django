@@ -31,15 +31,7 @@
       <h4>Cards (<span id="card-count"></span>)</h4>
       <div id="flashcard-list" class="small">
         {% for f in flash_cards %}
-          {% if forloop.first %}
-              {% include "core/card_list_item.html" with rounded="rounded-top"%}                       
-          {% else %}
-            {% if forloop.last %}
-              {% include "core/card_list_item.html" with rounded="rounded-bottom"%}       
-            {% else %}
-              {% include "core/card_list_item.html"%}
-            {% endif %}
-          {% endif %}
+            {% include "core/card_list_item.html"%}
         {% endfor %}
       </div>
     </div>

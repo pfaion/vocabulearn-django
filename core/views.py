@@ -17,10 +17,6 @@ def index(request, set_id=None):
         folder: list(CardSet.objects.order_by('name').filter(folder=folder.id))
         for folder in Folder.objects.order_by('name')
     }
-    print(directory)
-    
-    
-    
     
     flash_cards = [f.getDict() for f in FlashCard.objects.order_by('created_date')]
         
