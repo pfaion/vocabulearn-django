@@ -26,7 +26,6 @@ def delete_card(request, card_id):
 def folder(request, folder_id):
     folder = Folder.objects.get(pk=folder_id)
     if request.method == 'POST':
-        print("got update request, name = {}".format(request.POST['name']))
         folder.update(request.POST['name'])
         return HttpResponse('Saved.')
         
@@ -36,3 +35,18 @@ def new_folder(request):
         folder = Folder()
         folder.save()
         return JsonResponse({'id': folder.id})
+        
+        
+def card_set(request, set_id):
+    card_set = CardSet.objects.get(pk=set_id)
+    if request.method == 'POST':
+        card_set.update(request.POST['name'])
+        return HttpResponse('Saved.')
+        
+
+def new_card_set(request, folder_id):
+    if request.method == 'PUT':
+        card_set = CardSet()
+        card_set.folder = Folder.objects.get(pk=folder_id)
+        card_set.save()
+        return JsonResponse({'id': card_set.id})

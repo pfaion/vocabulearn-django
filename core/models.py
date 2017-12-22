@@ -28,6 +28,10 @@ class CardSet(models.Model):
     
     def __str__(self):
         return self.name
+    
+    def update(self, name):
+        self.name = name
+        self.save()
         
 
 class FlashCard(models.Model):

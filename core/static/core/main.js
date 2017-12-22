@@ -38,10 +38,8 @@ $(document).ready(function() {
     $(this).toggleClass("alert-secondary");
   });
   
-  $("#set-list").find(".folder-add .row").click(function() {
-    $("#modal-add-folder").modal("show");
-  });
-  $("#modal-add-folder").find("#submit-button").click(function() {
+  
+  function submit_add_folder() {
     console.log("clicked");
     $.ajax({
       method: "PUT",
@@ -61,7 +59,51 @@ $(document).ready(function() {
         location.reload();
       });
     });
-  })
+  }
+  $("#set-list").find(".folder-add .row").click(function() {
+    $("#modal-add-folder").modal("show");
+  });
+  $("#modal-add-folder").find("#submit-button").click(submit_add_folder);
+  $("#modal-add-folder").find("form").submit(function(event) {
+    event.preventDefault();
+    submit_add_folder();
+  });
+  
+  
+  
+  function submit_add_set() {
+    console.log("clicked");
+    var folder_id = $("#modal-add-set").find("#hidden-data").html();
+    $.ajax({
+      method: "PUT",
+      url: `/API/set/new/${folder_id}/`,
+    }).done(function(data) {
+      console.log("created done");
+      var id = data.id;
+      var name = $("#modal-add-set").find("#field").val();
+      $.ajax({
+        method: "POST",
+        url: `/API/set/${id}/`,
+        data: {
+          name: name
+        }
+      }).done(function() {
+        console.log("updated done");
+        window.location.replace(`/set/${id}/`);
+      });
+    });
+  }
+  $("#set-list").find(".card-set-add .row").click(function() {
+    var folder_id = $(this).find(".folder-id").html();
+    $("#modal-add-set").find("#hidden-data").html(folder_id);
+    $("#modal-add-set").modal("show");
+  });
+  $("#modal-add-set").find("#submit-button").click(submit_add_set);
+  $("#modal-add-set").find("form").submit(function(event) {
+    event.preventDefault();
+    submit_add_set();
+  });
+  
   
   $("#set-list").find(".card-set-add .row").click(function() {
     $("#modal-add-set").modal("show");
