@@ -35,7 +35,7 @@ $(document).ready(function() {
   });
   
   $("#set-list").find(".card-set .row").hover(function() {
-    $(this).toggleClass("alert-primary");
+    $(this).toggleClass("alert-secondary");
   });
   
   set_id = $("#set-id").html()

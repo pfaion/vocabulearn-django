@@ -1,6 +1,6 @@
 <li class="list-group-item border-0 card-set">
   <a href="/set/{{set.id}}">
-    <div class="row rounded">
+    <div class="row rounded {% if set.id == set_id %} alert-primary {% endif %}">
       <div class="label">{{set.name}}</div>
     </div>
   </a>
