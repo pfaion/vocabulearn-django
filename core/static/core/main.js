@@ -39,80 +39,96 @@ $(document).ready(function() {
   });
   
   
-  function submit_add_folder() {
-    console.log("clicked");
-    $.ajax({
-      method: "PUT",
-      url: `/API/folder/new/`,
-    }).done(function(data) {
-      console.log("created done");
-      var id = data.id;
-      var name = $("#modal-add-folder").find("#field").val();
-      $.ajax({
-        method: "POST",
-        url: `/API/folder/${id}/`,
-        data: {
-          name: name
-        }
-      }).done(function() {
-        console.log("updated done");
-        location.reload();
-      });
-    });
-  }
+  
   $("#set-list").find(".folder-add .row").click(function() {
-    $("#modal-add-folder").modal("show");
-  });
-  $("#modal-add-folder").find("#submit-button").click(submit_add_folder);
-  $("#modal-add-folder").find("form").submit(function(event) {
-    event.preventDefault();
-    submit_add_folder();
+    console.log("clicked add folder");
+    setup_modal("Add Folder");
+    set_modal_submit(submit_add_folder);
+    show_modal();
   });
   
   
   
-  function submit_add_set() {
-    console.log("clicked");
-    var folder_id = $("#modal-add-set").find("#hidden-data").html();
-    $.ajax({
-      method: "PUT",
-      url: `/API/set/new/${folder_id}/`,
-    }).done(function(data) {
-      console.log("created done");
-      var id = data.id;
-      var name = $("#modal-add-set").find("#field").val();
-      $.ajax({
-        method: "POST",
-        url: `/API/set/${id}/`,
-        data: {
-          name: name
-        }
-      }).done(function() {
-        console.log("updated done");
-        window.location.replace(`/set/${id}/`);
-      });
-    });
-  }
+  
   $("#set-list").find(".card-set-add .row").click(function() {
     var folder_id = $(this).find(".folder-id").html();
-    $("#modal-add-set").find("#hidden-data").html(folder_id);
-    $("#modal-add-set").modal("show");
-  });
-  $("#modal-add-set").find("#submit-button").click(submit_add_set);
-  $("#modal-add-set").find("form").submit(function(event) {
-    event.preventDefault();
-    submit_add_set();
+    setup_modal("Add Card Set");
+    set_modal_submit(submit_add_set, folder_id);
+    show_modal();
   });
   
-  
-  $("#set-list").find(".card-set-add .row").click(function() {
-    $("#modal-add-set").modal("show");
-  });
   
   set_id = $("#set-id").html()
   
 });
 
+function submit_add_folder() {
+  console.log("submit add folder called");
+  $.ajax({
+    method: "PUT",
+    url: `/API/folder/new/`,
+  }).done(function(data) {
+    console.log("created done");
+    var id = data.id;
+    var name = $("#modal").find("#field").val();
+    $.ajax({
+      method: "POST",
+      url: `/API/folder/${id}/`,
+      data: {
+        name: name
+      }
+    }).done(function() {
+      console.log("updated done");
+      location.reload();
+    });
+  });
+}
+
+function submit_add_set(folder_id) {
+  console.log("submit add set called");
+  $.ajax({
+    method: "PUT",
+    url: `/API/set/new/${folder_id}/`,
+  }).done(function(data) {
+    console.log("created done");
+    var id = data.id;
+    var name = $("#modal").find("#field").val();
+    $.ajax({
+      method: "POST",
+      url: `/API/set/${id}/`,
+      data: {
+        name: name
+      }
+    }).done(function() {
+      console.log("updated done");
+      window.location.replace(`/set/${id}/`);
+    });
+  });
+}
+
+function setup_modal(title) {
+  var button_text = title.split(" ")[0];
+  $("#modal").find(".modal-title").html(title);
+  $("#modal").find("#submit-button").html(button_text);
+  
+  $("#modal").find("#submit-button").off("click");
+  $("#modal").find("form").off("submit");
+}
+
+function set_modal_submit(callback, data=null) {
+  $("#modal").find("#submit-button").click(function() {
+    callback(data);
+  });
+  $("#modal").find("form").submit(function(event) {
+    event.preventDefault();
+    callback(data);
+  });
+}
+
+function show_modal() {
+  $("#modal").modal("show");
+  $("#modal").find("#field").focus();
+}
 
 
 function add_list_click_handlers() {
