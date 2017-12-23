@@ -63,10 +63,34 @@ $(document).ready(function() {
     show_modal();
   });
   
+  $("#set-list").find(".card-set .more").click(function(event) {
+    event.stopPropagation();
+    var set_id = $(this).parent().find(".set-id").html();
+    var name = $(this).parent().find(".label").html();
+    setup_modal("Edit Card Set", name);
+    set_modal_submit(submit_edit_folder, folder_id);
+    show_modal();
+  });
+  
   
   set_id = $("#set-id").html()
   
 });
+
+function submit_edit_set(set_id) {
+  console.log("submit edit set called");
+  var name = $("#modal").find("#field").val();
+  $.ajax({
+    method: "POST",
+    url: `/API/set/${set_id}/`,
+    data: {
+      name: name
+    }
+  }).done(function() {
+    console.log("updated done");
+    window.location.replace(`/set/${set_id}/`);
+  });
+}
 
 function submit_edit_folder(folder_id) {
   console.log("submit edit folder called");
