@@ -9,7 +9,9 @@ from .models import Folder, CardSet, FlashCard
 def index(request, set_id=None):
     
     if set_id is None:
-        first_card_id = CardSet.objects.order_by('name').first().id
+        first_card_id = CardSet.objects\
+            .filter(folder=Folder.objects.order_by('name').first())\
+            .order_by('name').first().id
         set_id = first_card_id
     
     
