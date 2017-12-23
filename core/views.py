@@ -9,10 +9,11 @@ from .models import Folder, CardSet, FlashCard
 def index(request, set_id=None):
     
     if set_id is None:
-        first_card_id = CardSet.objects\
-            .filter(folder=Folder.objects.order_by('name').first())\
-            .order_by('name').first().id
-        set_id = first_card_id
+        for folder in Folder.objects.order_by('name'):
+            sets = CardSet.objects.filter(folder=folder)
+            if len(sets) > 0:
+                set_id = sets.order_by('name').first().id
+                break
     
     
     directory = {
