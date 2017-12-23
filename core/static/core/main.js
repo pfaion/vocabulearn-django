@@ -47,9 +47,6 @@ $(document).ready(function() {
     show_modal();
   });
   
-  
-  
-  
   $("#set-list").find(".card-set-add .row").click(function() {
     var folder_id = $(this).find(".folder-id").html();
     setup_modal("Add Card Set");
@@ -57,10 +54,34 @@ $(document).ready(function() {
     show_modal();
   });
   
+  $("#set-list").find(".folder .more").click(function(event) {
+    event.stopPropagation();
+    var folder_id = $(this).parent().find(".folder-id").html();
+    var name = $(this).parent().find(".label").html();
+    setup_modal("Edit Folder", name);
+    set_modal_submit(submit_edit_folder, folder_id);
+    show_modal();
+  });
+  
   
   set_id = $("#set-id").html()
   
 });
+
+function submit_edit_folder(folder_id) {
+  console.log("submit edit folder called");
+  var name = $("#modal").find("#field").val();
+  $.ajax({
+    method: "POST",
+    url: `/API/folder/${folder_id}/`,
+    data: {
+      name: name
+    }
+  }).done(function() {
+    console.log("updated done");
+    location.reload();
+  });
+}
 
 function submit_add_folder() {
   console.log("submit add folder called");
@@ -106,10 +127,11 @@ function submit_add_set(folder_id) {
   });
 }
 
-function setup_modal(title) {
+function setup_modal(title, field="") {
   var button_text = title.split(" ")[0];
   $("#modal").find(".modal-title").html(title);
   $("#modal").find("#submit-button").html(button_text);
+  $("#modal").find("#field").val(field);
   
   $("#modal").find("#submit-button").off("click");
   $("#modal").find("form").off("submit");
