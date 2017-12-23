@@ -11,26 +11,63 @@
 }
 
 #set-list .row {
+  cursor: pointer;
+  user-select: none;
+}
+
+#set-list .row > * {
   padding-top: 3px;
   padding-bottom: 3px;
   min-height: 22px;
-  cursor: pointer;
-  user-select: none;
 }
 
 .folder .row,
 .folder-add .row {
   margin: 0 0 -1px 0;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 0px;
+  padding-right: 0px;
 }
 
 #set-list .icon {
   flex-basis: 10%;
+  text-align: center;
 }
 
-#set-list .label {
-  flex-basis: 90%;
+#set-list .folder .label {
+  flex-basis: 80%;
+}
+
+#set-list .card-set .spacer,
+.card-set-add .spacer {
+  flex-basis: 15%;
+}
+#set-list .card-set .label,
+#set-list .card-set-add .label {
+  flex-basis: 75%;
+}
+
+#set-list .more {
+  flex-basis: 10%;
+  text-align: center;
+}
+
+#set-list .more::before,
+#set-list .more::after {
+  content: "\0020";
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+#set-list .more span {
+  vertical-align: middle;
+}
+
+#set-list .folder .more:hover {
+  background-color: #535C66;
+}
+
+#set-list .card-set .more:hover {
+  background-color: #d6d8d9;
 }
 
 #set-list a {
@@ -44,17 +81,12 @@
 }
 
 
-/* .folder div {
-  padding-left: 0px;
-  padding-right: 0px;
-} */
-
 .card-set .row,
 .card-set-add .row {
-  margin: 0 0 -1px 30px;
-  padding-left: 10px;
-  padding-right: 10px;
+  margin: 0 0 -1px 0;
 }
+
+
 
 span.empty::before {
   display: inline-block;
