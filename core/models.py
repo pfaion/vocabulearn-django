@@ -20,6 +20,10 @@ class Folder(models.Model):
     def update(self, name):
         self.name = name
         self.save()
+    
+    def getDict(self):
+        data = model_to_dict(self)
+        return EasyDict(data)
         
 
 class CardSet(models.Model):

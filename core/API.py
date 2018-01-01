@@ -28,6 +28,11 @@ def folder(request, folder_id):
     if request.method == 'POST':
         folder.update(request.POST['name'])
         return HttpResponse('Saved.')
+
+def folders(request):
+    if request.method == 'GET':
+        f = {'folders': [f.getDict() for f in Folder.objects.order_by('name')]}
+        return JsonResponse(f)
         
 
 def new_folder(request):
