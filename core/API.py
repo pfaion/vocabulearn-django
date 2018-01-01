@@ -34,6 +34,12 @@ def folders(request):
         f = {'folders': [f.getDict() for f in Folder.objects.order_by('name')]}
         return JsonResponse(f)
         
+def card_sets(request, folder_id):
+    folder = Folder.objects.get(pk=folder_id)
+    if request.method == 'GET':
+        data = [c.getDict() for c in CardSet.objects.order_by('name').filter(folder=folder.id)]
+        return JsonResponse({"sets": data})
+        
 
 def new_folder(request):
     if request.method == 'PUT':
