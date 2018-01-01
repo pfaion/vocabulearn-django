@@ -47,6 +47,8 @@ def card_set(request, set_id):
     if request.method == 'POST':
         card_set.update(request.POST['name'])
         return HttpResponse('Saved.')
+    elif request.method == 'GET':
+        return JsonResponse(card_set.getDict())
         
 
 def new_card_set(request, folder_id):

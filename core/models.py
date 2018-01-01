@@ -37,6 +37,10 @@ class CardSet(models.Model):
         self.name = name
         self.save()
         
+    def getDict(self):
+        data = model_to_dict(self)
+        return EasyDict(data)
+        
 
 class FlashCard(models.Model):
     front = models.CharField(max_length=2000)
