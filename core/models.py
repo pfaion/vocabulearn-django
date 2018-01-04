@@ -46,6 +46,7 @@ class FlashCard(models.Model):
     front = models.CharField(max_length=2000)
     back = models.CharField(max_length=2000)
     created_date = models.DateTimeField('date created', default=timezone.now)
+    history = models.CharField(max_length=1200, default="")
     card_set = models.ForeignKey(CardSet, on_delete=models.CASCADE)
     
     trunc_length = 20

@@ -9,6 +9,11 @@ def card(request, card_id):
         return HttpResponse('Saved.')
     elif request.method == 'GET':
         return JsonResponse(card.getDict())
+        
+def cards(request):
+    if request.method == 'GET':
+        data = [c.getDict() for c in FlashCard.objects.order_by('created_date')]
+        return JsonResponse({"cards": data}) 
 
 def new_card(request, set_id):
     if request.method == 'PUT':
