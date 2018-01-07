@@ -77,6 +77,6 @@ def results(request, result):
         data = [pair.split(':') for pair in result.split(',')]
         for cardID, r in data:
             card = FlashCard.objects.get(pk=cardID)
-            card.history = (r + card.history)[:10]
+            card.history = (r + card.history)[:16]
             card.save()
         return HttpResponse('Saved.')
