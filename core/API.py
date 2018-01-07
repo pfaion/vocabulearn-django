@@ -74,5 +74,9 @@ def new_card_set(request, folder_id):
 
 def results(request, result):
     if request.method == 'GET':
-        print(result)
+        data = [pair.split(':') for pair in result.split(',')]
+        for cardID, r in data:
+            card = FlashCard.objects.get(pk=cardID)
+            card.history = (r + card.history)[:10]
+            card.save()
         return HttpResponse('Saved.')
