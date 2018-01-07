@@ -71,3 +71,9 @@ def new_card_set(request, folder_id):
         card_set.folder = Folder.objects.get(pk=folder_id)
         card_set.save()
         return JsonResponse({'id': card_set.id})
+
+def results(request):
+    if request.method == 'POST':
+        data = request.POST['data']
+        print(data)
+        return HttpResponse('Saved.')
