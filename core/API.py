@@ -1,6 +1,7 @@
 from django.http import HttpResponse, JsonResponse
 
 from .models import FlashCard, CardSet, Folder
+import datetime
 
 def card(request, card_id):
     card = FlashCard.objects.get(pk=card_id)
@@ -74,9 +75,11 @@ def new_card_set(request, folder_id):
 
 def results(request, result):
     if request.method == 'GET':
-        data = [pair.split(':') for pair in result.split(',')]
+        card_data, timestamp = result.split(";")
+        data = [pair.split(':') for pair in card_data.split(',')]
         for cardID, r in data:
             card = FlashCard.objects.get(pk=cardID)
             card.history = (r + card.history)[:16]
+            card.last_trained_date = datetime.fromtimestamp(timestamp)
             card.save()
         return HttpResponse('Saved.')

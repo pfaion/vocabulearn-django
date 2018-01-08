@@ -5,6 +5,7 @@ from django.utils.text import Truncator
 from django.utils import timezone
 
 from easydict import EasyDict
+import datetime
 
 # Create your models here.
 
@@ -48,6 +49,7 @@ class FlashCard(models.Model):
     created_date = models.DateTimeField('date created', default=timezone.now)
     history = models.CharField(max_length=1200, default="")
     card_set = models.ForeignKey(CardSet, on_delete=models.CASCADE)
+    last_trained_date = models.DateTimeField('last trained date', default=timezone.now)
     
     trunc_length = 20
     
