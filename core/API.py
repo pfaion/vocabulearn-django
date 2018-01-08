@@ -80,6 +80,6 @@ def results(request, result):
         for cardID, r in data:
             card = FlashCard.objects.get(pk=cardID)
             card.history = (r + card.history)[:16]
-            card.last_trained_date = datetime.fromtimestamp(timestamp)
+            card.last_trained_date = datetime.datetime.fromtimestamp(int(timestamp))
             card.save()
         return HttpResponse('Saved.')
