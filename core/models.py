@@ -50,6 +50,7 @@ class FlashCard(models.Model):
     history = models.CharField(max_length=1200, default="")
     card_set = models.ForeignKey(CardSet, on_delete=models.CASCADE)
     last_trained_date = models.DateTimeField('last trained date', default=timezone.now)
+    front_first = models.BooleanField(default=False)
     
     trunc_length = 20
     
@@ -60,7 +61,8 @@ class FlashCard(models.Model):
         data = model_to_dict(self)
         return EasyDict(data)
     
-    def update(self, front, back):
+    def update(self, front, back, front_first):
         self.front = front
         self.back = back
+        self.front_first = front_first
         self.save()

@@ -6,7 +6,10 @@ import datetime
 def card(request, card_id):
     card = FlashCard.objects.get(pk=card_id)
     if request.method == 'POST':
-        card.update(request.POST['front'], request.POST['back'])
+        front_first = request.POST['front_first'] == "true"
+        print(request.POST['front_first'])
+        print(front_first)
+        card.update(request.POST['front'], request.POST['back'], front_first)
         return HttpResponse('Saved.')
     elif request.method == 'GET':
         return JsonResponse(card.getDict())

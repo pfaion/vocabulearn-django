@@ -7,6 +7,12 @@ $(document).ready(function() {
   add_tab_navigation();
   reload_list_numbering();
   
+  
+  $('#front-first').change(function() {
+    save_current_flashcard();
+  })
+  
+  
   select_list_item($("#flashcard-list").find(".row").first());
   $("#detail-front").focus();
   
@@ -214,6 +220,13 @@ function show_item_detail(item) {
     var field = $(`#detail-${type}`);
     field.val(content);
   })
+  var front_first = $(item).children(".front-first").html();
+  var checkbox = $('#front-first');
+  if(front_first == "True") {
+    checkbox.prop("checked", true);
+  } else if (front_first == "False") {
+    checkbox.prop("checked", false);
+  }
 }
 
 function add_delete_button_handler(list_item) {
@@ -253,6 +266,7 @@ function check_flashcard_change() {
   var active_card_id = $(active_item).children(".id").html();
   var changed_front = $("#detail-front").val();
   var changed_back = $("#detail-back").val();
+  var changed_front_first = $("#front-first").prop("checked");
   var list_item = $(`#card-${active_card_id}`);
   var old_front = list_item.children(".front").html();
   var old_back = list_item.children(".back").html();
@@ -262,9 +276,26 @@ function check_flashcard_change() {
       id: active_card_id,
       front: changed_front,
       back: changed_back,
+      front_first: changed_front_first
     }
     save_flashcard(card);
   }
+}
+
+function save_current_flashcard() {
+  var active_card_id = $(active_item).children(".id").html();
+  var changed_front = $("#detail-front").val();
+  var changed_back = $("#detail-back").val();
+  var changed_front_first = $("#front-first").prop("checked");
+  
+  card = {
+    id: active_card_id,
+    front: changed_front,
+    back: changed_back,
+    front_first: changed_front_first
+  }
+  
+  save_flashcard(card);
 }
 
 function save_flashcard(card) {
@@ -275,6 +306,7 @@ function save_flashcard(card) {
     data: {
       front: card.front,
       back: card.back,
+      front_first: card.front_first
     }
   }).done(function() {
     reload_list_item(card.id).done(function(){
@@ -298,6 +330,8 @@ function reload_list_item(id) {
     list_item.find(".back").html(data.back);
     list_item.find(".front_short").html(data.front);
     list_item.find(".back_short").html(data.back);
+    console.log(data);
+    list_item.find(".front-first").html(String(data.front_first));
   });
 }
 
@@ -316,6 +350,8 @@ function add_tab_navigation() {
       } else {
         $("#detail-back").focus();
       }
+    } else if(event.keyCode == 32 && event.ctrlKey) {
+      toggleAlwaysFront();
     }
   });
   $("#detail-back").keydown(function(event) {
@@ -333,8 +369,16 @@ function add_tab_navigation() {
           return;
         }
       }
+    } else if(event.keyCode == 32 && event.ctrlKey) {
+      toggleAlwaysFront();
     }
   });
+}
+
+function toggleAlwaysFront(){
+  var checkbox = $('#front-first');
+  checkbox.prop("checked", !checkbox.prop("checked"));
+  save_current_flashcard();
 }
 
 function extend_cards() {
