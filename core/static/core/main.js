@@ -222,9 +222,9 @@ function show_item_detail(item) {
   })
   var front_first = $(item).children(".front-first").html();
   var checkbox = $('#front-first');
-  if(front_first == "True") {
+  if(front_first.toLowerCase() == "true") {
     checkbox.prop("checked", true);
-  } else if (front_first == "False") {
+  } else if (front_first.toLowerCase() == "false") {
     checkbox.prop("checked", false);
   }
 }
