@@ -12,6 +12,10 @@ $(document).ready(function() {
     save_current_flashcard();
   })
   
+  $('#marked').change(function() {
+    save_current_flashcard();
+  })
+  
   
   select_list_item($("#flashcard-list").find(".row").first());
   $("#detail-front").focus();
@@ -221,11 +225,19 @@ function show_item_detail(item) {
     field.val(content);
   })
   var front_first = $(item).children(".front-first").html();
-  var checkbox = $('#front-first');
+  var ff_checkbox = $('#front-first');
   if(front_first.toLowerCase() == "true") {
-    checkbox.prop("checked", true);
+    ff_checkbox.prop("checked", true);
   } else if (front_first.toLowerCase() == "false") {
-    checkbox.prop("checked", false);
+    ff_checkbox.prop("checked", false);
+  }
+  
+  var marked = $(item).children(".marked").html();
+  var mark_checkbox = $('#marked');
+  if(marked.toLowerCase() == "true") {
+    mark_checkbox.prop("checked", true);
+  } else if (marked.toLowerCase() == "false") {
+    mark_checkbox.prop("checked", false);
   }
 }
 
@@ -267,6 +279,7 @@ function check_flashcard_change() {
   var changed_front = $("#detail-front").val();
   var changed_back = $("#detail-back").val();
   var changed_front_first = $("#front-first").prop("checked");
+  var changed_marked = $("#marked").prop("checked");
   var list_item = $(`#card-${active_card_id}`);
   var old_front = list_item.children(".front").html();
   var old_back = list_item.children(".back").html();
@@ -276,7 +289,8 @@ function check_flashcard_change() {
       id: active_card_id,
       front: changed_front,
       back: changed_back,
-      front_first: changed_front_first
+      front_first: changed_front_first,
+      marked: changed_marked
     }
     save_flashcard(card);
   }
@@ -287,12 +301,14 @@ function save_current_flashcard() {
   var changed_front = $("#detail-front").val();
   var changed_back = $("#detail-back").val();
   var changed_front_first = $("#front-first").prop("checked");
+  var changed_marked = $("#marked").prop("checked");
   
   card = {
     id: active_card_id,
     front: changed_front,
     back: changed_back,
-    front_first: changed_front_first
+    front_first: changed_front_first,
+    marked: changed_marked
   }
   
   save_flashcard(card);
@@ -306,7 +322,8 @@ function save_flashcard(card) {
     data: {
       front: card.front,
       back: card.back,
-      front_first: card.front_first
+      front_first: card.front_first,
+      marked: card.marked
     }
   }).done(function() {
     reload_list_item(card.id).done(function(){
@@ -332,6 +349,7 @@ function reload_list_item(id) {
     list_item.find(".back_short").html(data.back);
     console.log(data);
     list_item.find(".front-first").html(String(data.front_first));
+    list_item.find(".marked").html(String(data.marked));
   });
 }
 
@@ -395,6 +413,7 @@ function extend_cards() {
     new_list_item.find(".back_short").html(data.back)
     new_list_item.find(".front").html(data.front)
     new_list_item.find(".back").html(data.back)
+    new_list_item.find(".marked").prop("checked", false);
     new_list_item.click(list_click_handler);
     add_delete_button_handler(new_list_item);
     new_list_item.insertAfter($(current_active));

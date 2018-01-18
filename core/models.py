@@ -62,8 +62,9 @@ class FlashCard(models.Model):
         data = model_to_dict(self)
         return EasyDict(data)
     
-    def update(self, front, back, front_first):
+    def update(self, front, back, front_first, marked):
         self.front = front
         self.back = back
         self.front_first = front_first
+        self.marked = marked
         self.save()

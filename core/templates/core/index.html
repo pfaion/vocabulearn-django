@@ -2,11 +2,14 @@
 
 {% block content %}
 <div class="container">
-  <h1>Vocabulearn</h1>
+  <a href="/"><h1>Vocabulearn</h1></a>
   <div id="menu" class="row">
     <div class="col-xl-12">
       <div class="btn-group float-right" role="group" >
         <a href="/logout" class="btn btn-outline-danger"><span class="material-icons icon-small">person</span>Logout</a>
+      </div>
+      <div class="btn-group float-right" role="group" >
+        <a href="/marked" class="btn btn-outline-secondary"><span class="material-icons icon-small">warning</span>Marked</a>
       </div>
     </div>
   </div>
@@ -40,10 +43,14 @@
         <h4>Front / Back</h4>
         <textarea class="form-control" id="detail-front"> </textarea>
         <textarea class="form-control" id="detail-back"> </textarea>
-        <div>
+        <div class="checkboxes">
           <input type="checkbox" value="" id="front-first">
           <label class="form-check-label" for="frontFirst">
             Always front first
+          </label>
+          <input type="checkbox" value="" id="marked">
+          <label class="form-check-label" for="marked">
+            Marked
           </label>
         </div>
       </div>

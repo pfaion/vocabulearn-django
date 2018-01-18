@@ -1,3 +1,12 @@
+
+a {
+  color: black;
+}
+a:hover {
+  text-decoration: none;
+  color: black;
+}
+
 #menu {
   top: 0px;
   position: sticky;
@@ -186,4 +195,8 @@ button.btn-small {
 #login-form {
   padding: 20px;
   width: 500px;
+}
+
+.checkboxes label {
+  padding-right: 40px;
 }
