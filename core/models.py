@@ -51,6 +51,7 @@ class FlashCard(models.Model):
     card_set = models.ForeignKey(CardSet, on_delete=models.CASCADE)
     last_trained_date = models.DateTimeField('last trained date', default=timezone.now)
     front_first = models.BooleanField(default=False)
+    marked = models.BooleanField(default=False)
     
     trunc_length = 20
     
