@@ -79,15 +79,17 @@ def new_card_set(request, folder_id):
 def results(request, result):
     if request.method == 'GET':
         card_data, timestamp, marked_cards = result.split(";")
-        data = [pair.split(':') for pair in card_data.split(',')]
-        for cardID, r in data:
-            card = FlashCard.objects.get(pk=cardID)
-            card.history = (r + card.history)[:16]
-            card.last_trained_date = datetime.datetime.fromtimestamp(int(timestamp))
-            card.save()
-        marked_ids = marked_cards.split(",")
-        for cardID in marked_ids:
-            card = FlashCard.objects.get(pk=cardID)
-            card.marked = True
-            card.save()
+        if card_data != "":
+            data = [pair.split(':') for pair in card_data.split(',')]
+            for cardID, r in data:
+                card = FlashCard.objects.get(pk=cardID)
+                card.history = (r + card.history)[:16]
+                card.last_trained_date = datetime.datetime.fromtimestamp(int(timestamp))
+                card.save()
+        if marked_cards != "":
+            marked_ids = marked_cards.split(",")
+            for cardID in marked_ids:
+                card = FlashCard.objects.get(pk=cardID)
+                card.marked = True
+                card.save()
         return HttpResponse('Saved.')
