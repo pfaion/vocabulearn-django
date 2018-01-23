@@ -48,8 +48,10 @@ class FlashCard(models.Model):
     back = models.CharField(max_length=2000)
     created_date = models.DateTimeField('date created', default=timezone.now)
     history = models.CharField(max_length=1200, default="")
+    history_back = models.CharField(max_length=1200, default="")
     card_set = models.ForeignKey(CardSet, on_delete=models.CASCADE)
     last_trained_date = models.DateTimeField('last trained date', default=timezone.now)
+    last_trained_date_back = models.DateTimeField('last trained date back', default=timezone.now)
     front_first = models.BooleanField(default=False)
     marked = models.BooleanField(default=False)
     

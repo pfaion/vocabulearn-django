@@ -77,13 +77,20 @@ def new_card_set(request, folder_id):
 
 def results(request, result):
     if request.method == 'GET':
-        card_data, timestamp, marked_cards = result.split(";")
-        if card_data != "":
-            data = [pair.split(':') for pair in card_data.split(',')]
+        card_data_front, card_data_back, timestamp, marked_cards = result.split(";")
+        if card_data_front != "":
+            data = [pair.split(':') for pair in card_data_front.split(',')]
             for cardID, r in data:
                 card = FlashCard.objects.get(pk=cardID)
                 card.history = (r + card.history)[:16]
                 card.last_trained_date = datetime.datetime.fromtimestamp(int(timestamp))
+                card.save()
+        if card_data_back != "":
+            data = [pair.split(':') for pair in card_data_back.split(',')]
+            for cardID, r in data:
+                card = FlashCard.objects.get(pk=cardID)
+                card.history_back = (r + card.history_back)[:16]
+                card.last_trained_date_back = datetime.datetime.fromtimestamp(int(timestamp))
                 card.save()
         if marked_cards != "":
             marked_ids = marked_cards.split(",")
