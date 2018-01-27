@@ -84,12 +84,15 @@ def results(request, result):
                 card = FlashCard.objects.get(pk=cardID)
                 card.history = (r + card.history)[:16]
                 card.last_trained_date = datetime.datetime.fromtimestamp(int(timestamp))
+                if card.front_first:
+                    card.last_trained_date_back = datetime.datetime.fromtimestamp(int(timestamp))
                 card.save()
         if card_data_back != "":
             data = [pair.split(':') for pair in card_data_back.split(',')]
             for cardID, r in data:
                 card = FlashCard.objects.get(pk=cardID)
                 card.history_back = (r + card.history_back)[:16]
+                card.last_trained_date = datetime.datetime.fromtimestamp(int(timestamp))
                 card.last_trained_date_back = datetime.datetime.fromtimestamp(int(timestamp))
                 card.save()
         if marked_cards != "":
