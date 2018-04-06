@@ -1,11 +1,13 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
+from django.views.generic import TemplateView
 
 from . import views
 from . import API
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('test', TemplateView.as_view(template_name='core/test.html'), name='index'),
     path('set/<int:set_id>/', views.index, name='index'),
     path('marked/', views.marked, name='marked'),
     path('login/', auth_views.login, {'template_name': 'core/login.html'}, name='login'),

@@ -1,0 +1,45 @@
+{
+  "name": "vocabulearn-django",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "babel-loader": "^7.1.4",
+    "vue-cli": "^2.9.3",
+    "vue-template-compiler": "^2.5.16",
+    "webpack-bundle-tracker": "^0.3.0"
+  },
+  "devDependencies": {
+    "axios": "^0.18.0",
+    "babel-core": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "babel-runtime": "^6.26.0",
+    "bootstrap-sass": "^3.3.7",
+    "css-loader": "^0.28.11",
+    "jquery": "^3.3.1",
+    "node-sass": "^4.8.3",
+    "sass-loader": "^6.0.7",
+    "style-loader": "^0.20.3",
+    "vue": "^2.5.16",
+    "vue-hot-reload-api": "^2.3.0",
+    "vue-html-loader": "^1.2.4",
+    "vue-loader": "^14.2.2",
+    "webpack": "^4.5.0",
+    "webpack-cli": "^2.0.14"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pfaion/vocabulearn-django.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pfaion/vocabulearn-django/issues"
+  },
+  "homepage": "https://github.com/pfaion/vocabulearn-django#readme"
+}
