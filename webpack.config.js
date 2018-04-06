@@ -4,13 +4,20 @@ var BundleTracker = require('webpack-bundle-tracker');
 
 module.exports = {
     context: __dirname,
-    entry: './assets/js/index',
+    entry: [
+        'webpack-dev-server/client?http://localhost:3000',
+        'webpack/hot/only-dev-server',
+        './assets/js/index'
+    ],
     output: {
         path: path.resolve('./assets/bundles/'),
-        filename: 'app.js'
+        filename: 'app.js',
+        publicPath: 'http://localhost:3000/assets/bundles/'
     },
 
     plugins: [
+        new webpack.HotModuleReplacementPlugin(),
+        //new webpack.NoErrorsPlugin(), // don't reload if there is an error
         new BundleTracker({filename: './webpack-stats.json'}),
     ],
 
@@ -30,5 +37,6 @@ module.exports = {
     resolve: {
         alias: {vue: 'vue/dist/vue.js'}
     },
+    mode: 'production'
 
 };
