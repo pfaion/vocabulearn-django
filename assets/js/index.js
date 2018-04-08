@@ -1,11 +1,8 @@
-require('bootstrap-sass');
 import Vue from 'vue';
 
-import Demo from "./components/Demo.vue";
+import App from "./components/App.vue";
 
 const app = new Vue({
     el: '#app',
-    components: {
-        Demo
-    }
+    render: h => h(App)
 });

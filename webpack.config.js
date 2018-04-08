@@ -49,7 +49,10 @@ module.exports = {
 	},
 	
 	resolve: {
-		alias: {vue: 'vue/dist/vue.js'}
+		alias: {
+			vue: 'vue/dist/vue.js',
+			'style': path.resolve(__dirname, './assets/style/')
+		}
 	},
 	mode: 'production'
 
