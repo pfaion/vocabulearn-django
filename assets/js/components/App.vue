@@ -1,17 +1,8 @@
 <template>
   <div class="main-app">
     <div class="container">
-      <a href="/"><h1>Vocabulearn</h1></a>
-      <div id="menu" class="row">
-        <div class="col-xl-12">
-          <div class="btn-group float-right" role="group" >
-            <a href="/logout" class="btn btn-outline-danger"><span class="material-icons icon-small">person</span>Logout</a>
-          </div>
-          <div class="btn-group float-right" role="group" >
-            <a href="/marked" class="btn btn-outline-secondary"><span class="material-icons icon-small">warning</span>Marked</a>
-          </div>
-        </div>
-      </div>
+      <h1 id="banner"><a href="/">Vocabulearn</a></h1>
+      <main-menu/>
       
       <div class="row">
         <div class="col-xl-3">
@@ -57,7 +48,9 @@
         </div>
       </div>
     </div>
-    <span id="set-id" class="hidden">{{set_id}}</span>
+    <span id="set-id" class="hidden">
+      <!-- {{set_id}} -->
+    </span>
 
     <div id="modal" class="modal" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">
@@ -86,15 +79,30 @@
   </div>
 </template>
 
-<script>
+<script>  
+  export default {
+    data () {
+      return {}
+    }
+  }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   @import "~style/_vars";
+  
   a {
     color: black;
     &:hover {
       text-decoration: none;
     }
   }
+  
+  .material-icons {
+    vertical-align: text-top;
+  }
+  
+  .icon-small {
+    font-size: 18px;
+  }
+  
 </style>
