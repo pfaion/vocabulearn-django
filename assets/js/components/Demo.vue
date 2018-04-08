@@ -7,5 +7,9 @@
 <script>
 </script>
 
-<style>
+<style lang="scss" scoped>
+  $color: #8f8;
+  p {
+    background-color: $color;
+  }
 </style>
