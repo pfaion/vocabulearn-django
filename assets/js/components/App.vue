@@ -1,108 +1,39 @@
 <template>
-  <div class="main-app">
-    <div class="container">
+  <div id="main-app">
+    <div id="app-body" class="container">
       <h1 id="banner"><a href="/">Vocabulearn</a></h1>
       <main-menu/>
-      
-      <div class="row">
-        <div class="col-xl-3">
-          <div class="sticky">
-            <h4>Sets</h4>
-            <ul id="set-list" class="list-group small">
-              <!-- {% for folder, sets in directory.items %}
-                {% include "core/card-set-item-folder.html"%}
-                {% for set in sets %}
-                  {% include "core/card-set-item-set.html"%}
-                {% endfor %}
-                  {% include "core/card-set-item-add-set.html"%}
-              {% endfor %}
-              {% include "core/card-set-item-add-folder.html"%} -->
-            </ul>
-          </div>
-        </div>
-        <div class="col-xl-4">
-          <h4>Cards (<span id="card-count"></span>)</h4>
-          <div id="flashcard-list" class="small">
-            <!-- {% for f in flash_cards %}
-                {% include "core/card_list_item.html"%}
-            {% endfor %} -->
-          </div>
-        </div>
-        <div id="flashcard-detail" class="col-xl-5">
-          <div class="sticky">
-            <h4>Front / Back</h4>
-            <textarea class="form-control" id="detail-front"> </textarea>
-            <textarea class="form-control" id="detail-back"> </textarea>
-            <div class="checkboxes">
-              <input type="checkbox" value="" id="front-first">
-              <label class="form-check-label" for="frontFirst">
-                Always front first
-              </label>
-              <input type="checkbox" value="" id="marked">
-              <label class="form-check-label" for="marked">
-                Marked
-              </label>
-            </div>
-          </div>
-          
-        </div>
+      <div id="content" class="row">
+        <box class="col-xl-3"/>
+        <cards class="col-xl-4"/>
+        <card-detail class="col-xl-5"/>
       </div>
     </div>
-    <span id="set-id" class="hidden">
-      <!-- {{set_id}} -->
-    </span>
-
-    <div id="modal" class="modal" tabindex="-1" role="dialog">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title"></h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span class="material-icons icon-small">close</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <form>
-              <div class="form-group">
-                <label for="field">Name</label>
-                <input type="text" class="form-control" id="field">
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary" id='submit-button'></button>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-          </div>
-        </div>
-      </div>
-    </div>
+    <modal/>
   </div>
 </template>
 
-<script>  
+<script> 
+  import MainMenu from './MainMenu.vue';
+  import Box from './Box.vue';
+  import Cards from './Cards.vue';
+  import CardDetail from './CardDetail.vue';
+  import Modal from './Modal.vue';
+  
   export default {
     data () {
       return {}
+    },
+    components: {
+      'main-menu': MainMenu,
+      'box': Box,
+      'cards': Cards,
+      'card-detail': CardDetail,
+      'modal': Modal
     }
   }
 </script>
 
 <style lang="scss">
-  @import "~style/_vars";
-  
-  a {
-    color: black;
-    &:hover {
-      text-decoration: none;
-    }
-  }
-  
-  .material-icons {
-    vertical-align: text-top;
-  }
-  
-  .icon-small {
-    font-size: 18px;
-  }
-  
+  @import "~style/main";
 </style>

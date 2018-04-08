@@ -1,0 +1,84 @@
+@import "~bootstrap/scss/bootstrap";
+
+////////////////////////////////////////////////////////////////////////////////
+// GENERAL LEVEL
+////////////////////////////////////////////////////////////////////////////////
+
+.hidden {
+  display: none !important;
+}
+
+a {
+  color: black;
+  &:hover {
+    color: black;
+    text-decoration: none;
+  }
+}
+
+.material-icons {
+  vertical-align: text-top;
+}
+
+.icon-small {
+  font-size: 18px;
+}
+.icon-smaller {
+  font-size: 15px;
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+// MENU
+////////////////////////////////////////////////////////////////////////////////
+
+#menu {
+  top: 0px;
+  position: sticky;
+  background-color: white;
+  padding: 10px;
+  z-index: 1;
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+// BOX
+////////////////////////////////////////////////////////////////////////////////
+
+#folder-list  {
+  padding-bottom: 100px;
+}
+
+.box-list-item {
+  @extend .list-group-item;
+  @extend .border-0;
+  
+  cursor: pointer;
+  user-select: none;
+  padding: 3px 0px;
+}
+
+.box-list-badge {
+  @extend .row;
+  @extend .rounded;
+  margin: 0 0 -1px 0;
+  padding-left: 0px;
+  padding-right: 0px;
+  
+  > * {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    min-height: 22px;
+  }
+  
+  > .icon {
+    flex-basis: 10%;
+    text-align: center;
+  }
+  
+  > .more {
+    @extend .rounded;
+    flex-basis: 10%;
+    text-align: center;
+  }
+}
