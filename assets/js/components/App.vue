@@ -20,9 +20,24 @@
   import CardDetail from './CardDetail.vue';
   import Modal from './Modal.vue';
   
+  import { getCookie, setCookie } from 'tiny-cookie';
+  
+  import { state } from '../index.js';
+  
   export default {
     data () {
-      return {}
+      return state.$data;
+    },
+    watch: {
+      activeSet: function(val) {
+        if(val == null) return;
+        setCookie('activeSet', val);
+      }
+    },
+    created() {
+      if(state.activeSet == null && getCookie('activeSet') != null) {
+        state.activeSet = getCookie('activeSet');
+      }
     },
     components: {
       'main-menu': MainMenu,

@@ -1,6 +1,9 @@
 <template>
   <li>
-    <div class="set-badge">
+    <div class="set-badge"
+      :class="{'alert-primary': isActive}"
+      v-on:click="setActive">
+      
       <div class="spacer"></div>
       <div class="label">{{name}}</div>
       <div class="more">
@@ -12,6 +15,7 @@
 
 <script>
 
+  import { state } from '../index.js';
   
   export default {
     data () {
@@ -22,6 +26,17 @@
     props: {
       name: String,
       id: Number
+    },
+    computed: {
+      isActive: function() {
+        if(state.activeSet == null) return false;
+        return this.id == state.activeSet;
+      }
+    },
+    methods: {
+      setActive: function() {
+        state.activeSet = this.id;
+      }
     }
   }
 </script>

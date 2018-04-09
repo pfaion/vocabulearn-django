@@ -40,6 +40,8 @@
   import Set from './Set.vue';
   import { getCookie, setCookie } from 'tiny-cookie';
   
+  import { state } from '../index.js';
+  
   export default {
     data () {
       return {
@@ -60,11 +62,18 @@
       },
       cookieName: function() {
         return `folder-${this.id}-expanded`;
+      },
+      hasActiveSet: function() {
+        if(state.activeSet == null) return false;
+        return _.some(this.sets, ['id', state.activeSet]);
       }
     },
     watch: {
       expanded: function(val) {
         setCookie(this.cookieName, val);
+      },
+      hasActiveSet: function(val) {
+        if(val) this.expanded = true;
       }
     },
     created() {
@@ -77,10 +86,12 @@
       fetchData() {
         axios.get(`/API/sets/${this.id}`)
           .then(response => {
-            this.sets = response.data.sets
+            this.sets = response.data.sets;
+            this.$emit('ready');
           })
       },
       toggleExpand() {
+        if(this.hasActiveSet) return;
         this.expanded = !this.expanded;
       }
     }
