@@ -6,7 +6,9 @@
   "dependencies": {
     "babel-loader": "^7.1.4",
     "bootstrap": "^4.0.0",
+    "tiny-cookie": "^2.1.1",
     "vue-cli": "^2.9.3",
+    "vue-cookie": "^1.1.4",
     "vue-template-compiler": "^2.5.16",
     "webpack-bundle-tracker": "^0.3.0"
   },

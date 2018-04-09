@@ -15,11 +15,5 @@
 </script>
 
 <style lang="scss">
-  #menu {
-    top: 0px;
-    position: sticky;
-    background-color: white;
-    padding: 10px;
-    z-index: 1;
-  }
+  
 </style>

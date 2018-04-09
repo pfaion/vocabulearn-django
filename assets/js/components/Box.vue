@@ -12,7 +12,7 @@
         ></folder>
         
         <li class="box-list-item">
-          <div class="box-list-badge text-secondary">
+          <div class="add-folder-badge text-secondary">
             <div class="icon">
               <span class="material-icons icon-smaller">add</span>
             </div>

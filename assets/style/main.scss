@@ -4,8 +4,9 @@
 // GENERAL LEVEL
 ////////////////////////////////////////////////////////////////////////////////
 
-.hidden {
-  display: none !important;
+html {
+  // permanent scrollbar so no layout jumps
+  overflow-y: scroll;
 }
 
 a {
@@ -37,7 +38,7 @@ a {
   position: sticky;
   background-color: white;
   padding: 10px;
-  z-index: 1;
+  z-index: 10;
 }
 
 
@@ -71,14 +72,62 @@ a {
     min-height: 22px;
   }
   
+  > .more {
+    @extend .rounded;
+    flex-basis: 10%;
+    text-align: center;
+  }
+}
+
+.folder-badge {
+  @extend .box-list-badge;
+  
   > .icon {
     flex-basis: 10%;
     text-align: center;
   }
   
-  > .more {
-    @extend .rounded;
-    flex-basis: 10%;
-    text-align: center;
+  > .label {
+    flex-basis: 80%;
+  }
+  
+  > .more:hover {
+    background-color: #535C66;
+  }
+}
+
+.add-folder-badge {
+  @extend .folder-badge;
+  
+  &:hover {
+    @extend .alert-success;
+  }
+}
+
+.set-badge {
+  @extend .box-list-badge;
+  
+  &:hover {
+    @extend .alert-secondary;
+  }
+  
+  > .spacer {
+    flex-basis: 15%;
+  }
+  
+  > .label {
+    flex-basis: 75%;
+  }
+  
+  > .more:hover {
+    background-color: #d6d8d9;
+  }
+}
+
+.add-set-badge {
+  @extend .set-badge;
+  
+  &:hover {
+    @extend .alert-success;
   }
 }
