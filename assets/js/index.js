@@ -2,7 +2,8 @@ import Vue from 'vue';
 
 export const state = new Vue({
   data: {
-    activeSet: null
+    activeSet: null,
+    activeCard: null
   }
 });
 

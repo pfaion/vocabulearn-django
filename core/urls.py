@@ -15,6 +15,7 @@ urlpatterns = [
     path('API/card/<int:card_id>/', API.card, name='card'),
     path('API/cards/', API.cards, name='card'),
     path('API/card/new/<int:set_id>/', API.new_card, name='card'),
+    path('API/cards-for-set/<int:set_id>/', API.cards_for_set, name='cards_for_set'),
     path('API/card/delete/<int:card_id>/', API.delete_card, name='card'),
     path('API/folder/<int:folder_id>/', API.folder, name='folder'),
     path('API/folder/new/', API.new_folder, name='folder'),
