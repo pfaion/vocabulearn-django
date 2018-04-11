@@ -1,7 +1,8 @@
 from django.http import HttpResponse, JsonResponse
 
-from .models import FlashCard, CardSet, Folder
+from .models import FlashCard, CardSet, Folder, SetHistory
 import datetime
+import time
 
 def card(request, card_id):
     card = FlashCard.objects.get(pk=card_id)
@@ -77,11 +78,13 @@ def new_card_set(request, folder_id):
 
 def results(request, result):
     if request.method == 'GET':
+        changed_sets = set()
         card_data_front, card_data_back, timestamp, marked_cards = result.split(";")
         if card_data_front != "":
             data = [pair.split(':') for pair in card_data_front.split(',')]
             for cardID, r in data:
                 card = FlashCard.objects.get(pk=cardID)
+                changed_sets.add(card.card_set.id)
                 card.history = (r + card.history)[:16]
                 card.last_trained_date = datetime.datetime.fromtimestamp(int(timestamp))
                 if card.front_first:
@@ -91,6 +94,7 @@ def results(request, result):
             data = [pair.split(':') for pair in card_data_back.split(',')]
             for cardID, r in data:
                 card = FlashCard.objects.get(pk=cardID)
+                changed_sets.add(card.card_set.id)
                 card.history_back = (r + card.history_back)[:16]
                 card.last_trained_date = datetime.datetime.fromtimestamp(int(timestamp))
                 card.last_trained_date_back = datetime.datetime.fromtimestamp(int(timestamp))
@@ -101,4 +105,51 @@ def results(request, result):
                 card = FlashCard.objects.get(pk=cardID)
                 card.marked = True
                 card.save()
+        
+        for set_id in changed_sets:
+            card_set = CardSet.objects.get(pk=set_id)
+            h = SetHistory.objects.filter(card_set=card_set)
+            cards = FlashCard.objects.filter(card_set=card_set)
+            if len(h) == 0:
+                h = SetHistory()
+                h.card_set = card_set
+                h.history = str(round(time.time())) + ":" + (",0"*10) + "," + str(len(cards))
+            else:
+                h = h[0]
+            
+            data = [0]*12
+            for c in cards:
+                if c.history == "":
+                    data[11] += 1
+                else:
+                    idx = 5 - round(c.scoreFront() / 3)
+                    data[idx] += 1
+                if not c.front_first:
+                    if c.history_back == "":
+                        data[11] += 1
+                    else:
+                        idx = 5 - round(c.scoreBack() / 3)
+                        data[idx] += 1
+            new_entry = str(round(time.time())) + ":" + ",".join([str(d) for d in data])
+            
+            history = new_entry + ";" + h.history
+            entries = history.split(";")
+            if len(entries) > 11:
+                timestamps = [int(entry.split(":")[0]) for entry in entries]
+                time_diff = timestamps[-1] - timestamps[0]
+                stepsize = time_diff / 10
+                target_stamps = [timestamps[0] + (i * stepsize) for i in range(len(timestamps))]
+                fitness = dict()
+                for to_remove in range(1, len(timestamps)-1):
+                    fitness[to_remove] = 0
+                    for i in range(1, len(timestamps)-1):
+                        new_i = i if i < to_remove else i - 1
+                        fitness[to_remove] += abs(target_stamps[i] - timestamps[new_i])
+                least_fit = min(fitness, key=fitness.get)
+                entries.pop(least_fit)
+                history = ";".join(entries)
+                
+            h.update(history=history)
+                
         return HttpResponse('Saved.')
+        
