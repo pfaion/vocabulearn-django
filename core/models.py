@@ -94,7 +94,7 @@ class SetHistory(models.Model):
     history = models.CharField(max_length=2000)
     
     def __str__(self):
-        return "History for set id: {}, entries: {}".format(self.id, self.history.count(";") + 1)
+        return "History for set id: {}, entries: {}".format(self.card_set.id, self.history.count(";") + 1)
     
     def getDict(self):
         data = model_to_dict(self)
