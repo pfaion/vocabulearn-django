@@ -70,3 +70,37 @@ class FlashCard(models.Model):
         self.front_first = front_first
         self.marked = marked
         self.save()
+        
+    def scoreFront(self):
+        score = 0
+        for i, r in enumerate(self.history[0:5]):
+            if r == "0":
+                score -= (5-i)
+            elif r == "1":
+                score += (5-i)
+        return score
+        
+    def scoreBack(self):
+        score = 0
+        for i, r in enumerate(self.history_back[0:5]):
+            if r == "0":
+                score -= (5-i)
+            elif r == "1":
+                score += (5-i)
+        return score
+
+class SetHistory(models.Model):
+    card_set = models.ForeignKey(CardSet, on_delete=models.CASCADE)
+    history = models.CharField(max_length=2000)
+    
+    def __str__(self):
+        return "History for set id: {}, entries: {}".format(self.id, self.history.count(";") + 1)
+    
+    def getDict(self):
+        data = model_to_dict(self)
+        return EasyDict(data)
+    
+    def update(self, history):
+        self.history = history
+        self.save()
+        
