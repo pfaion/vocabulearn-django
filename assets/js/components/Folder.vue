@@ -1,15 +1,24 @@
 <template>
   <li>
     
-    <div v-on:click="toggleExpand" class="folder-badge bg-dark text-white">
+    <div @click="toggleExpand" class="folder-badge bg-dark text-white">
       <div class="icon">
         <span class="material-icons icon-smaller">{{iconType}}</span>
       </div>
       <div class="label">{{name}}</div>
-      <div class="more">
+      <div class="more" @click.stop="showEditModal = true">
         <span class="material-icons icon-smaller">more_horiz</span>
       </div>
     </div>
+    
+    <modal v-if='showEditModal'
+      :title="'Edit Folder'"
+      :fieldName="'Name'"
+      :fieldContent="name"
+      :buttonText="'Edit'"
+      @closed="showEditModal = false"
+      @submit="editFolder"
+    />
     
     <ul v-if="expanded" class="set-list list-group">
       
@@ -30,6 +39,8 @@
         </div>
       </li>
       
+      
+      
     </ul>
     
   </li>
@@ -38,6 +49,7 @@
 
 <script>
   import Set from './Set.vue';
+  import Modal from './Modal.vue';
   import { getCookie, setCookie } from 'tiny-cookie';
   
   import { state } from '../index.js';
@@ -46,11 +58,13 @@
     data () {
       return {
         expanded: false,
-        sets: []
+        sets: [],
+        showEditModal: false
       }
     },
     components: {
-      'set': Set
+      'set': Set,
+      'modal': Modal
     },
     props: {
       name: String,
@@ -93,6 +107,9 @@
       toggleExpand() {
         if(this.hasActiveSet) return;
         this.expanded = !this.expanded;
+      },
+      editFolder() {
+        console.log('edit folder');
       }
     }
   }

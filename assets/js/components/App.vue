@@ -9,7 +9,9 @@
         <card-detail class="col-xl-5"/>
       </div>
     </div>
-    <modal/>
+    <div v-if="modalActive">
+      <div id="modal"/>
+    </div>
   </div>
 </template>
 
@@ -18,7 +20,6 @@
   import Box from './Box.vue';
   import Cards from './Cards.vue';
   import CardDetail from './CardDetail.vue';
-  import Modal from './Modal.vue';
   
   import { getCookie, setCookie } from 'tiny-cookie';
   
@@ -43,8 +44,7 @@
       'main-menu': MainMenu,
       'box': Box,
       'cards': Cards,
-      'card-detail': CardDetail,
-      'modal': Modal
+      'card-detail': CardDetail
     }
   }
 </script>

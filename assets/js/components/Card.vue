@@ -32,7 +32,6 @@
     },
     methods: {
       setActive() {
-        console.log("test");
         state.activeCard = this.card;
       }
     }

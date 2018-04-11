@@ -14,7 +14,9 @@
         ></folder>
         
         <li class="box-list-item">
-          <div class="add-folder-badge text-secondary">
+          <div
+            class="add-folder-badge text-secondary"
+            @click="newFolderModal">
             <div class="icon">
               <span class="material-icons icon-smaller">add</span>
             </div>
@@ -72,6 +74,14 @@
           state.activeSet = folder.sets[0].id;
           break;
         }
+      },
+      newFolderModal() {
+        var modal = state.getNewModal();
+        modal.$on('submit', this.newFolder);
+        modal.init("Add Folder", "Name", "Add");
+      },
+      newFolder(name) {
+        console.log(name);
       }
     }
   }

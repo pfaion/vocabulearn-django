@@ -28,6 +28,10 @@ a {
   font-size: 15px;
 }
 
+.modal-open {
+  padding-right: 0 !important;
+}
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // MENU
@@ -178,6 +182,47 @@ a {
       text-align: center;
       padding-left: 5px;
       padding-right: 5px;
+    }
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// CARD DETAIL
+////////////////////////////////////////////////////////////////////////////////
+
+#flashcard-detail {
+  .sticky {
+    top: 65px;
+    position: sticky;
+  }
+
+  textarea {
+    resize: none;
+    display: block;
+    width: 100%;
+    height: 220px;
+    // margin-bottom: 10px;
+  }
+  
+  .checkboxes label {
+    padding-right: 40px;
+  }
+  #history-front, #history-back {
+    @extend .row;
+    margin: 5px;
+    height: 8px;
+    
+    div {
+      width: 8px;
+      height: 8px;
+      margin-right: 2px;
+    }
+    
+    .right {
+      background-color: green;
+    }
+    .wrong {
+      background-color: red;
     }
   }
 }
