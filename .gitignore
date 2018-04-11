@@ -132,4 +132,3 @@ venv.bak/
 .venv
 settings_secret.py
 env_secret.py
-webpack-stats.json
