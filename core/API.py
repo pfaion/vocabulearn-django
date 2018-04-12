@@ -127,39 +127,38 @@ def make_snapshot(set_id):
         history = ";".join(entries)
         
     h.update(history=history)
+
+def get_set_plot_data(card_set):
+    set_history = SetHistory.objects.filter(card_set=card_set)
+    if len(set_history) == 0:
+        make_snapshot(card_set.id)
+        set_history = SetHistory.objects.filter(card_set=card_set)
+    set_history = set_history[0]
+    
+    data = [[] for _ in range(12)]
+    for x, entry in enumerate(set_history.history.split(";")[:-1]):
+        ts, values = entry.split(':')
+        for line_i, y in enumerate(reversed(values.split(','))):
+            if y == '':
+                y = '0'
+            data[line_i].append(int(y))
+            
+    for x in range(len(data[0])):
+        csum = 0
+        for line_i in reversed(range(len(data))):
+            y = data[line_i][x]
+            data[line_i][x] += csum
+            csum += y
+        for line_i in reversed(range(len(data))):
+            data[line_i][x] /= csum
+    return data
+    
         
 def set_plot(request, set_id):
     if request.method == 'GET':
         
         card_set = CardSet.objects.get(pk=set_id)
-        set_history = SetHistory.objects.filter(card_set=card_set)
-        if len(set_history) == 0:
-            make_snapshot(set_id)
-            set_history = SetHistory.objects.filter(card_set=card_set)
-        set_history = set_history[0]
-        
-        
-        
-        data = [[] for _ in range(12)]
-        for x, entry in enumerate(set_history.history.split(";")[:-1]):
-            ts, values = entry.split(':')
-            for line_i, y in enumerate(reversed(values.split(','))):
-                if y == '':
-                    y = '0'
-                data[line_i].append(int(y))
-                
-                
-        for x in range(len(data[0])):
-            csum = 0
-            for line_i in reversed(range(len(data))):
-                y = data[line_i][x]
-                data[line_i][x] += csum
-                csum += y
-            for line_i in reversed(range(len(data))):
-                data[line_i][x] /= csum
-        
-        
-        
+        data = get_set_plot_data(card_set)
         
         colors = (
             "#cccccc",
@@ -175,7 +174,6 @@ def set_plot(request, set_id):
             "#1b8500",
             "#006600"
         )
-        
         
         fig = plt.figure()
         plt.title(card_set.name)
