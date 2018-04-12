@@ -1,7 +1,14 @@
+cycler==0.10.0
 dj-database-url==0.4.2
 Django==2.0
 easydict==1.7
 gunicorn==19.7.1
+kiwisolver==1.0.1
+matplotlib==2.2.2
+numpy==1.14.2
 psycopg2==2.7.3.2
+pyparsing==2.2.0
+python-dateutil==2.7.2
 pytz==2017.3
+six==1.11.0
 whitenoise==3.3.1
