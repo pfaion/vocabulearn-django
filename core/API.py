@@ -146,17 +146,15 @@ def results(request, result):
             
             history = new_entry + ";" + h.history
             entries = history.split(";")
-            if len(entries) > 11:
+            if len(entries) == 12:
                 timestamps = [int(entry.split(":")[0]) for entry in entries]
                 time_diff = timestamps[-1] - timestamps[0]
                 stepsize = time_diff / 10
-                target_stamps = [timestamps[0] + (i * stepsize) for i in range(len(timestamps))]
                 fitness = dict()
-                for to_remove in range(1, len(timestamps)-1):
+                for to_remove in range(1, 11):
                     fitness[to_remove] = 0
-                    for i in range(1, len(timestamps)-1):
-                        new_i = i if i < to_remove else i - 1
-                        fitness[to_remove] += abs(target_stamps[i] - timestamps[new_i])
+                    fitness[to_remove] += abs(timestamps[to_remove - 1] - timestamps[to_remove])
+                    fitness[to_remove] += abs(timestamps[to_remove + 1] - timestamps[to_remove])
                 least_fit = min(fitness, key=fitness.get)
                 entries.pop(least_fit)
                 history = ";".join(entries)
