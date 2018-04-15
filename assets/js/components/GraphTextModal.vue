@@ -4,17 +4,19 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">{{title}}</h5>
+          <h5 class="modal-title">
+            <span contenteditable="true">{{title}}</span>
+            <span class="text-muted">(click to edit)</span>
+          </h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span class="material-icons icon-small">close</span>
           </button>
         </div>
         <div class="modal-body">
-          <img src="/API/plots/all/" alt="" width="100%" />
+          <img :src="'/API/plots/'+graphUrl" alt="" width="100%" />
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" @click="submit()">{{buttonText}}</button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
         </div>
       </div>
     </div>
@@ -30,10 +32,7 @@
     data () {
       return {
         title: "",
-        fieldName: "",
-        fieldDefault: "",
-        fieldContent: "",
-        buttonText: "",
+        graphUrl: "",
         show: false,
         isMounted: false
       }
@@ -49,34 +48,29 @@
       }
     },
     created() {
-      var modal = this;
-      $(this.$el).on('hidden.bs.modal', function(event) {
-        modal.$emit('closed');
-        modal.$destroy();
-      });
+      console.log("created");
       state.modalActive = true;
+      var modal = this;
       Vue.nextTick(function() {
         modal.$mount('#modal');
       });
     },
     mounted() {
+      var modal = this;
+      $(this.$el).on('hidden.bs.modal', function(event) {
+        modal.$emit('closed');
+        modal.$destroy();
+      });
       this.isMounted = true;
     },
     destroyed() {
       state.modalActive = false;
     },
     methods: {
-      init(title, fieldName, buttonText, fieldDefault="") {
+      init(title, graphUrl) {
         this.title = title;
-        this.fieldName = fieldName;
-        this.buttonText = buttonText;
-        this.fieldDefault = fieldDefault;
-        this.fieldContent = this.fieldDefault;
+        this.graphUrl = graphUrl;
         this.show = true;
-      },
-      submit() {
-        this.$emit('submit', this.fieldContent);
-        $(this.$el).modal('hide');
       }
     }
   }

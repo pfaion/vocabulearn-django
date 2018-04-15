@@ -1,7 +1,9 @@
 <template>
   <div id="box">
     <div class="sticky">
-      <h4>Box</h4>
+      <h4 class="floatLeft">Box</h4>
+      <h4 id="box-graph" @click="showGraph"><span class="material-icons">timeline</span></h4>
+      <div class="clearFloat" />
       <ul id="folder-list" class="list-group small">
         
         <folder class="box-list-item"
@@ -31,7 +33,10 @@
 
 
 <script>
+  import Vue from 'vue';
   import Folder from './Folder.vue';
+  import GraphModal from './GraphModal.vue';
+  import Modal from './Modal.vue';
   
   import { state } from '../index.js';
   
@@ -81,7 +86,11 @@
         modal.init("Add Folder", "Name", "Add");
       },
       newFolder(name) {
-        console.log(name);
+        
+      },
+      showGraph() {
+        var modal = new (Vue.extend(GraphModal))();
+        modal.init("Overview: all cards", "all/");
       }
     }
   }

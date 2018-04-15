@@ -4,6 +4,7 @@ from django.views.generic import TemplateView
 
 from . import views
 from . import API
+from . import plotting
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -25,5 +26,7 @@ urlpatterns = [
     path('API/sets/', API.card_sets, name='card_sets'),
     path('API/set/new/<int:folder_id>/', API.new_card_set, name='card_set'),
     path('API/results/<str:result>/', API.results, name='results'),
-    path('API/plots/set/<int:set_id>/', API.set_plot, name='set_plot')
+    path('API/plots/set/<int:set_id>/', plotting.set_plot, name='set_plot'),
+    path('API/plots/folder/<int:folder_id>/', plotting.folder_plot, name='folder_plot'),
+    path('API/plots/all/', plotting.all_plot, name='all_plot')
 ]

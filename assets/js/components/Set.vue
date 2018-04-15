@@ -7,7 +7,7 @@
       <div class="spacer"></div>
       <div class="label">{{name}}</div>
       <div class="more">
-        <span class="material-icons icon-smaller">more_horiz</span>
+        <span class="material-icons icon-smaller">timeline</span>
       </div>
     </div>
   </li>

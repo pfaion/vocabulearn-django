@@ -6,8 +6,8 @@
         <span class="material-icons icon-smaller">{{iconType}}</span>
       </div>
       <div class="label">{{name}}</div>
-      <div class="more" @click.stop="showEditModal = true">
-        <span class="material-icons icon-smaller">more_horiz</span>
+      <div class="more" @click.stop="editFolder">
+        <span class="material-icons icon-smaller">timeline</span>
       </div>
     </div>
     
@@ -48,8 +48,10 @@
 
 
 <script>
+  import Vue from 'vue';
   import Set from './Set.vue';
   import Modal from './Modal.vue';
+  import GraphTextModal from './GraphTextModal.vue';
   import { getCookie, setCookie } from 'tiny-cookie';
   
   import { state } from '../index.js';
@@ -109,7 +111,9 @@
         this.expanded = !this.expanded;
       },
       editFolder() {
-        console.log('edit folder');
+        var modal = new (Vue.extend(GraphTextModal))();
+        modal.init(this.name, `folder/${this.id}/`);
+        console.log("editfolder");
       }
     }
   }
