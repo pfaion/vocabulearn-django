@@ -28,5 +28,6 @@ urlpatterns = [
     path('API/results/<str:result>/', API.results, name='results'),
     path('API/plots/set/<int:set_id>/', plotting.set_plot, name='set_plot'),
     path('API/plots/folder/<int:folder_id>/', plotting.folder_plot, name='folder_plot'),
-    path('API/plots/all/', plotting.all_plot, name='all_plot')
+    path('API/plots/all/', plotting.all_plot, name='all_plot'),
+    path('API/setHistory/', API.set_history, name='set_history')
 ]

@@ -83,6 +83,11 @@ def card_set(request, set_id):
     elif request.method == 'GET':
         return JsonResponse(card_set.getDict())
         
+def set_history(request):
+    if request.method == 'GET':
+        data = [h.getDict() for h in SetHistory.objects.all()]
+        return JsonResponse({'histories': data})
+        
 
 def new_card_set(request, folder_id):
     if request.method == 'PUT':
