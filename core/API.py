@@ -225,4 +225,6 @@ def results(request, result):
             make_snapshot(set_id)
                 
         return HttpResponse('Saved.')
-        
+
+def debug(request, result):
+    HttpResponse('Debug.')
