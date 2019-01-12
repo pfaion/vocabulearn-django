@@ -227,4 +227,4 @@ def results(request, result):
         return HttpResponse('Saved.')
 
 def debug(request, result):
-    HttpResponse('Debug.')
+    return HttpResponse('Debug.')
