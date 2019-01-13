@@ -226,5 +226,6 @@ def results(request, result):
                 
         return HttpResponse('Saved.')
 
-def debug(request, result):
+def debug(request):
+    print("42")
     return HttpResponse('Debug.')
