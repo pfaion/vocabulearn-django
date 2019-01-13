@@ -3,6 +3,7 @@ from django.contrib.auth import views as auth_views
 
 from . import views
 from . import API
+from . import API2
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -23,5 +24,5 @@ urlpatterns = [
     path('API/set/new/<int:folder_id>/', API.new_card_set, name='card_set'),
     path('API/results/<str:result>/', API.results, name='results'),
     path('API/plots/set/<int:set_id>/', API.set_plot, name='set_plot'),
-    path('API/debug/', API.debug, name='debug'),
+    path('API/v2/debug/', API2.debug, name='debug'),
 ]
